@@ -1,10 +1,9 @@
 import DetailHero from "../../components/Detail/Detail_Hero";
 import Head from "next/head";
 import { fullData } from "../../interfaces";
-import Recommended from "../../components/Detail/Recommended";
+import Characters from "../../components/Detail/Character";
 
-function id({ data }: fullData, C_data) {
-  console.log(C_data);
+function id({ data }: fullData) {
   const { data: result } = data;
   return (
     <>
@@ -17,7 +16,7 @@ function id({ data }: fullData, C_data) {
       </Head>
       <main className="Container">
         <DetailHero data={result} />
-        <Recommended data={C_data} />
+        <Characters id={result.mal_id} />
       </main>
     </>
   );
@@ -30,14 +29,11 @@ export const getServerSideProps = async (context: {
   res: any;
 }) => {
   const { params, res } = context;
+
   const response = await fetch(
     `https://api.jikan.moe/v4/anime/${params.id}/full`
   );
   const data = await response.json();
-  const C_response = await fetch(
-    `https://api.jikan.moe/v4/anime/${params.id}/characters`
-  );
-  const C_data = await C_response.json();
   res.setHeader(
     "Cache-Control",
     "public, s-maxage=10, stale-while-revalidate=59"
@@ -45,7 +41,6 @@ export const getServerSideProps = async (context: {
   return {
     props: {
       data,
-      C_data,
     },
   };
 };

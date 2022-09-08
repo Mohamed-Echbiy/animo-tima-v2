@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { dataOb } from "../../interfaces";
 import { useState } from "react";
 import Header from "../Header";
+import { nanoid } from "nanoid";
 
 //-------------------------
 
@@ -12,7 +13,7 @@ function DetailHero({ data }: dataOb) {
   };
   const summary = data.synopsis.slice(0, 350);
   return (
-    <Div>
+    <Div_A className="Detail_page">
       <div className="hero_container">
         <Header />
         <div className="background__image">
@@ -46,7 +47,7 @@ function DetailHero({ data }: dataOb) {
             <div className="title_summary ml-10 flex flex-col md:flex-row md:items-center">
               <div className="summary">
                 <h1 className="title">{data.title}</h1>
-                <p>
+                <p className="synposis">
                   {showMore ? data.synopsis : `${summary}...`}
                   <span
                     className="block text-green-700 font-semibold cursor-pointer"
@@ -68,7 +69,10 @@ function DetailHero({ data }: dataOb) {
                 <p className="gener mb-2">
                   <span className="block mb-2">Genre</span>
                   {data.genres.map((e) => (
-                    <span className="p-1 mr-1 border border-solid rounded-lg">
+                    <span
+                      key={nanoid()}
+                      className="p-1 mr-1 border border-solid rounded-lg"
+                    >
                       {e.name}
                     </span>
                   ))}
@@ -79,7 +83,7 @@ function DetailHero({ data }: dataOb) {
           </div>
         </div>
       </div>
-    </Div>
+    </Div_A>
   );
 }
 
@@ -87,7 +91,7 @@ export default DetailHero;
 
 //-----------------------------------
 
-const Div = styled.div`
+const Div_A = styled.div`
   min-height: 100vh;
   position: relative;
   .background__image {
@@ -102,6 +106,16 @@ const Div = styled.div`
       filter: blur(50px) brightness(40%);
     }
   }
+  .cover_image {
+    width: 20%;
+    min-width: 200px;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px 5px #000000b8;
+    }
+  }
   .infos {
     width: 100%;
     display: flex;
@@ -114,13 +128,13 @@ const Div = styled.div`
       justify-content: center;
       align-items: center;
       h1 {
-        font-size: 1.7rem;
+        font-size: 2.5rem;
         margin-bottom: 5px;
         font-weight: 600;
         color: gold;
       }
       .summary {
-        max-width: 765px;
+        max-width: 800px;
       }
     }
     .more_details {
