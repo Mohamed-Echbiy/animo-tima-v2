@@ -56,3 +56,13 @@ body {
   margin-left: auto;
   margin-right: auto;
 } */
+.shine {
+  animation: shine ease 1s infinite;
+  -webkit-animation: shine ease-out 1s infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: right -40px top 0;
+  }
+}

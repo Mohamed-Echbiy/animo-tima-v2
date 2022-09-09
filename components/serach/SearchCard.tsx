@@ -5,7 +5,6 @@ import { dataOb } from "../../interfaces";
 // -----------
 
 function SearchCard({ data }: dataOb) {
-  console.log(data);
   const title = data.title.slice(0, 19);
   // -----------
 
