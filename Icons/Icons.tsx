@@ -106,8 +106,8 @@ export const Play = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="70"
-      height="70"
+      width="20"
+      height="20"
       fill="currentColor"
       className="bi bi-play-circle"
       viewBox="0 0 16 16"

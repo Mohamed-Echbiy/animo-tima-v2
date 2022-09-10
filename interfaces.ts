@@ -420,3 +420,20 @@ export interface fullData {
     };
   };
 }
+
+export interface EpisodeVideos {
+  mal_id: number;
+  title: "string";
+  episode: "string";
+  url: "string";
+  images: {
+    jpg: {
+      image_url: "string";
+    };
+  };
+
+  // pagination: {
+  //   last_visible_page: number;
+  //   has_next_page: boolean;
+  // };
+}

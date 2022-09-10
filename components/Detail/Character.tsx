@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import styled from "styled-components";
 
-function Characters({ id }) {
+function Characters({ id }: Number | any) {
   const [ImageLoad, setImageLoad] = useState(false);
   const fetchChracter = async () => {
     const res = await fetch(`https://api.jikan.moe/v4/anime/${id}/characters`);

@@ -1,11 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import {
+  JSXElementConstructor,
+  ReactElement,
+  ReactFragment,
+  useState,
+} from "react";
 import styled from "styled-components";
 import { Play } from "../../Icons/Icons";
+import { EpisodeVideos } from "../../interfaces";
 import NotFound from "../NotFound";
 
-function Episodes({ id }) {
+function Episodes({ id }: Number | any) {
   const [Page, setPage] = useState(1);
   const [ImageLoad, setImageLoad] = useState(false);
   const FetchEpisodes = async () => {
@@ -23,8 +29,7 @@ function Episodes({ id }) {
   }
   // DESTRUCTION
   const { data: results, pagination } = data;
-  console.log(results);
-  // console.log(Page);
+  // console.log(data);
   return (
     <Episodes_Container className="mt-10 px-4 md:px-2 lg:px-3 xl:px-5 2xl:px-10">
       <h1>Episodes : </h1>
@@ -51,7 +56,7 @@ function Episodes({ id }) {
       ) : (
         <>
           <Content>
-            {results.map((e) => (
+            {results.map((e: EpisodeVideos) => (
               <>
                 <div key={nanoid()} className="episode">
                   <img
@@ -62,7 +67,7 @@ function Episodes({ id }) {
                     onLoad={() => setImageLoad((pre) => true)}
                   />
 
-                  <div className="play_button">
+                  <div className="play_button w-7 md:w-9 lg:w-11 xl:w-14 2xl:w-16">
                     <a href={e.url} title="watch the episode">
                       <Play />
                     </a>
@@ -137,14 +142,12 @@ const Content = styled.div`
     }
     .play_button {
       position: absolute;
-      top: 50%;
+      top: 40%;
       left: 50%;
       transform: translate(-50%, -50%);
-      @media (max-width: 760px) {
-        svg {
-          width: 20px;
-          height: 20px;
-        }
+      svg {
+        width: 100%;
+        height: 100%;
       }
     }
     p {

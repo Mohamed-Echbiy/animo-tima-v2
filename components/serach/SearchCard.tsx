@@ -81,6 +81,12 @@ export const Div = styled.div`
       left: 50%;
       top: 45%;
       transform: translate(-50%, -50%);
+      width: 70px;
+      height: 70px;
+      svg {
+        width: 100%;
+        height: 100%;
+      }
     }
     .score_type {
       padding: 10px;

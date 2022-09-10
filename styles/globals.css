@@ -28,7 +28,7 @@ html {
     font-size: 14px;
   }
 }
-@media (min-width: 1280px) {
+/* @media (min-width: 1280px) {
   html {
     font-size: 18px;
   }
@@ -42,7 +42,7 @@ html {
   html {
     font-size: 24px;
   }
-}
+} */
 
 body {
   min-height: 100vh;
