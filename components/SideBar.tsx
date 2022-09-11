@@ -1,9 +1,40 @@
 import Link from "next/link";
 import { ArrowLeft, Burgger, Search } from "../Icons/Icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 function SideBar() {
+  const { route } = useRouter();
+  // console.log(route);
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    switch (route) {
+      case "/top_movies":
+        setActive(1);
+        break;
+      case "/top_series":
+        setActive(2);
+        break;
+      case "/popular":
+        setActive(3);
+        break;
+      case "/top_upcoming":
+        setActive(4);
+        break;
+      case "/top_ova":
+        setActive(5);
+        break;
+      case "/top_ona":
+        setActive(6);
+      case "/top_special":
+        setActive(7);
+        break;
+      default:
+        setActive(0);
+        break;
+    }
+  }, []);
   const [inputSearch, setInputSearch] = useState("unkown");
   const [menu, setmenu] = useState(false);
   const Displaymenu = () => {
@@ -48,24 +79,54 @@ function SideBar() {
             <a title="watch a random anime"> Random</a>
           </Link>
           <Link href="/popular">
-            <a title="go to most popular"> Most Popular </a>
+            <a
+              title="go to most popular"
+              className={active === 3 ? ` text-yellow-600 font-semibold` : ``}
+            >
+              Most Popular
+            </a>
           </Link>
-          <Link href="/movie">
-            <a title="go to movies section"> Movies</a>
+          <Link href="/top_movies">
+            <a
+              title="go to movies section"
+              className={active === 1 ? ` text-yellow-600 font-semibold` : ``}
+            >
+              Top Movies
+            </a>
           </Link>
-          <Link href="/tv">
-            <a title="go to tv series section"> Tv Series</a>
+          <Link href="/top_series">
+            <a
+              title="go to tv series section"
+              className={active === 2 ? ` text-yellow-600 font-semibold` : ``}
+            >
+              Top Tv Series
+            </a>
           </Link>
-          <Link href="/ova">
-            <a title="go to ova section"> OVAs</a>
+          <Link href="/top_ova">
+            <a
+              title="go to ova section"
+              className={active === 5 ? ` text-yellow-600 font-semibold` : ``}
+            >
+              OVAs
+            </a>
           </Link>
-          <Link href="/ona">
-            <a title="go to ona section"> ONAs</a>
+          <Link href="/top_ona">
+            <a
+              title="go to ona section"
+              className={active === 6 ? ` text-yellow-600 font-semibold` : ``}
+            >
+              ONAs
+            </a>
           </Link>
-          <Link href="/special">
-            <a title="go to specials section"> Specials</a>
+          <Link href="/top_special">
+            <a
+              title="go to specials section"
+              className={active === 7 ? ` text-yellow-600 font-semibold` : ``}
+            >
+              Specials
+            </a>
           </Link>
-          <Link href="/recommendation">
+          {/* <Link href="/recommendation">
             <a title="go to recommendation section"> Recommendation</a>
           </Link>
           <Link href="/reviews">
@@ -73,9 +134,14 @@ function SideBar() {
           </Link>
           <Link href="/this_season">
             <a title="watch this season anime"> This Season</a>
-          </Link>
-          <Link href="/upcoming_season">
-            <a title="discover the next season anime"> Upcoming Season</a>
+          </Link> */}
+          <Link href="/top_upcoming">
+            <a
+              title="discover the next season anime"
+              className={active === 4 ? ` text-yellow-600 font-semibold` : ``}
+            >
+              Top Upcoming
+            </a>
           </Link>
           <h3 className="p-3 font-semibold text-xl">
             Genre <span></span>

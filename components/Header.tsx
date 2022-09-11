@@ -1,11 +1,36 @@
 import Link from "next/link";
 import { Search } from "../Icons/Icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SideBar from "./SideBar";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 function Header() {
   const [inputSearch, setInputSearch] = useState("unkown");
+  const { route } = useRouter();
+  // console.log(route);
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    switch (route) {
+      case "/top_movies":
+        setActive(1);
+        break;
+      case "/top_series":
+        setActive(2);
+        break;
+      case "/popular":
+        setActive(3);
+        break;
+      case "/top_upcoming":
+        setActive(4);
+        break;
+
+      default:
+        setActive(0);
+        break;
+    }
+  }, []);
+  // console.log(active);
   return (
     <>
       <Div className="navbar">
@@ -41,16 +66,36 @@ function Header() {
         </SearchBar>
         <Ul_Links className="Links hidden 2xl:block">
           <Link href={`/top_movies`}>
-            <a title="go to movies">TOP Movies</a>
+            <a
+              title="go to movies"
+              className={active === 1 ? ` text-yellow-600 font-semibold` : ``}
+            >
+              TOP Movies
+            </a>
           </Link>
           <Link href={`/top_series`}>
-            <a title="go to top series">TOP Series</a>
+            <a
+              title="go to top series"
+              className={active === 2 ? ` text-yellow-600 font-semibold` : ``}
+            >
+              TOP Series
+            </a>
           </Link>
           <Link href={`/popular`}>
-            <a title="go to most popular">Most Popular</a>
+            <a
+              title="go to most popular"
+              className={active === 3 ? ` text-yellow-600 font-semibold` : ``}
+            >
+              Most Popular
+            </a>
           </Link>
           <Link href={`/top_upcoming`}>
-            <a title="go to top upcoming">TOP Upcoming</a>
+            <a
+              title="go to top upcoming"
+              className={active === 4 ? ` text-yellow-600 font-semibold` : ``}
+            >
+              TOP Upcoming
+            </a>
           </Link>
           <Link href={`/random`}>
             <a title="get a random anime">Random</a>

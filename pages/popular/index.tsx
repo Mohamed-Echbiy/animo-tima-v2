@@ -81,6 +81,7 @@ interface Data_type {
   data: [Movie_card_types];
 }
 function index({ data }: Data_type) {
+  console.log(data);
   return (
     <>
       <div className="top__movies__container flex flex-wrap justify-center">
@@ -101,21 +102,23 @@ export default index;
 //styling
 
 export const getStaticProps = async () => {
-  const resP1 = await fetch(`https://api.jikan.moe/v4/top/anime?type=movie`);
+  const resP1 = await fetch(
+    `https://api.jikan.moe/v4/top/anime?filter=bypopularity`
+  );
   const dataP1 = await resP1.json();
   const result1 = await dataP1.data;
   const resP2 = await fetch(
-    `https://api.jikan.moe/v4/top/anime?type=movie&page=2`
+    `https://api.jikan.moe/v4/top/anime?filter=bypopularity&page=2`
   );
   const dataP2 = await resP2.json();
   const result2 = await dataP2.data;
   const resP3 = await fetch(
-    `https://api.jikan.moe/v4/top/anime?type=movie&page=3`
+    `https://api.jikan.moe/v4/top/anime?filter=bypopularity&page=3`
   );
   const dataP3 = await resP3.json();
   const result3 = await dataP3.data;
 
-  const data = [...result1, ...result2, ...result3];
+  const data = [...result1, ...result2];
 
   return {
     props: {
