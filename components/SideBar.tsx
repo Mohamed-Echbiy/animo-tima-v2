@@ -8,6 +8,7 @@ function SideBar() {
   const { route } = useRouter();
   // console.log(route);
   const [active, setActive] = useState(0);
+  const [randomId, setRandomId] = useState(1);
   useEffect(() => {
     switch (route) {
       case "/top_movies":
@@ -27,6 +28,7 @@ function SideBar() {
         break;
       case "/top_ona":
         setActive(6);
+        break;
       case "/top_special":
         setActive(7);
         break;
@@ -34,6 +36,11 @@ function SideBar() {
         setActive(0);
         break;
     }
+    const randomid = () => {
+      let a = Math.floor(Math.random() * 1500);
+      setRandomId(a);
+    };
+    randomid();
   }, []);
   const [inputSearch, setInputSearch] = useState("unkown");
   const [menu, setmenu] = useState(false);
@@ -75,7 +82,7 @@ function SideBar() {
           </div>
         </SearchBar>
         <div className="items flex flex-col">
-          <Link href="/random">
+          <Link href={`/random/${randomId}`}>
             <a title="watch a random anime"> Random</a>
           </Link>
           <Link href="/popular">

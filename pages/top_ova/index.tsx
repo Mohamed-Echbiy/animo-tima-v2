@@ -83,9 +83,9 @@ interface Data_type {
 function index({ data }: Data_type) {
   return (
     <>
-      <div className="top__movies__container flex flex-wrap justify-center">
+      <div className="top__ova__container flex flex-wrap justify-center">
         <Head>
-          <title>Top Upcoming</title>
+          <title>Top Ova</title>
           <meta name="description" content="watch top movies anime free" />
         </Head>
         <Header />
@@ -101,18 +101,16 @@ export default index;
 //styling
 
 export const getStaticProps = async () => {
-  const resP1 = await fetch(
-    `https://api.jikan.moe/v4/top/anime?filter=upcoming`
-  );
+  const resP1 = await fetch(`https://api.jikan.moe/v4/top/anime?type=ova`);
   const dataP1 = await resP1.json();
   const result1 = await dataP1.data;
   const resP2 = await fetch(
-    `https://api.jikan.moe/v4/top/anime?filter=upcoming&page=2`
+    `https://api.jikan.moe/v4/top/anime?type=ova&page=2`
   );
   const dataP2 = await resP2.json();
   const result2 = await dataP2.data;
   const resP3 = await fetch(
-    `https://api.jikan.moe/v4/top/anime?filter=upcoming&page=3`
+    `https://api.jikan.moe/v4/top/anime?type=ova&page=3`
   );
   const dataP3 = await resP3.json();
   const result3 = await dataP3.data;

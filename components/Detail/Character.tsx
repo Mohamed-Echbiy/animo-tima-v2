@@ -22,7 +22,6 @@ function Characters({ id }: Number | any) {
     return <></>;
   }
   const { data: results } = data;
-  console.log(ImageLoad);
   return (
     <Div className="Characters mt-10 px-4 md:px-3 lg:px-3 xl:px-5 2xl:px-10">
       <h1 className="Characters__text mb-5">Characters :</h1>

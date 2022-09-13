@@ -83,9 +83,9 @@ interface Data_type {
 function index({ data }: Data_type) {
   return (
     <>
-      <div className="top__movies__container flex flex-wrap justify-center">
+      <div className="top__tv__container flex flex-wrap justify-center">
         <Head>
-          <title>Top Movies</title>
+          <title>Top Tv</title>
           <meta name="description" content="watch top movies anime free" />
         </Head>
         <Header />

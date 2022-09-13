@@ -31,6 +31,14 @@ function Header() {
     }
   }, []);
   // console.log(active);
+  const [randomId, setRandomId] = useState(1);
+  useEffect(() => {
+    const randomid = () => {
+      let a = Math.floor(Math.random() * 1500);
+      setRandomId(a);
+    };
+    randomid();
+  }, []);
   return (
     <>
       <Div className="navbar">
@@ -97,7 +105,7 @@ function Header() {
               TOP Upcoming
             </a>
           </Link>
-          <Link href={`/random`}>
+          <Link href={`/random/${randomId}`}>
             <a title="get a random anime">Random</a>
           </Link>
         </Ul_Links>

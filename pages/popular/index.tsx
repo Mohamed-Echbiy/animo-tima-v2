@@ -84,9 +84,9 @@ function index({ data }: Data_type) {
   console.log(data);
   return (
     <>
-      <div className="top__movies__container flex flex-wrap justify-center">
+      <div className="most__popular__container flex flex-wrap justify-center">
         <Head>
-          <title>Top Movies</title>
+          <title>Most Popular</title>
           <meta name="description" content="watch top movies anime free" />
         </Head>
         <Header />

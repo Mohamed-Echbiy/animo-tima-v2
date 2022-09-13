@@ -1,11 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
-import {
-  JSXElementConstructor,
-  ReactElement,
-  ReactFragment,
-  useState,
-} from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { Play } from "../../Icons/Icons";
 import { EpisodeVideos } from "../../interfaces";
@@ -57,8 +52,8 @@ function Episodes({ id }: Number | any) {
         <>
           <Content>
             {results.map((e: EpisodeVideos) => (
-              <>
-                <div key={nanoid()} className="episode">
+              <div key={nanoid()}>
+                <div className="episode">
                   <img
                     src={e.images.jpg.image_url}
                     width="100"
@@ -75,7 +70,7 @@ function Episodes({ id }: Number | any) {
                   {!ImageLoad && <div className="loading shine"></div>}
                   <p>{e.episode}</p>
                 </div>
-              </>
+              </div>
             ))}
           </Content>
         </>
@@ -114,6 +109,9 @@ const Content = styled.div`
   align-items: center;
   justify-content: space-around;
   position: relative;
+  div {
+    width: 24%;
+  }
   .loading {
     position: absolute;
     width: 100%;
@@ -129,7 +127,7 @@ const Content = styled.div`
     border-radius: 10px 10px 0px 0px;
   }
   .episode {
-    width: 24%;
+    width: 100%;
     min-width: 140px;
     max-width: 420px;
     margin-bottom: 1rem;
