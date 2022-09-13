@@ -10,6 +10,7 @@ function Header() {
   const { route } = useRouter();
   // console.log(route);
   const [active, setActive] = useState(0);
+  const [randomId, setRandomId] = useState(1);
   useEffect(() => {
     switch (route) {
       case "/top_movies":
@@ -29,16 +30,14 @@ function Header() {
         setActive(0);
         break;
     }
-  }, []);
-  // console.log(active);
-  const [randomId, setRandomId] = useState(1);
-  useEffect(() => {
     const randomid = () => {
-      let a = Math.floor(Math.random() * 1500);
+      let a = Math.floor(Math.random() * 2000);
       setRandomId(a);
     };
     randomid();
   }, []);
+  // console.log(active);
+
   return (
     <>
       <Div className="navbar">
@@ -106,7 +105,9 @@ function Header() {
             </a>
           </Link>
           <Link href={`/random/${randomId}`}>
-            <a title="get a random anime">Random</a>
+            <a title="get a random anime" target="_blank">
+              Random
+            </a>
           </Link>
         </Ul_Links>
         <Login className="login_btn">login</Login>

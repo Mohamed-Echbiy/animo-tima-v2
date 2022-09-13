@@ -2,6 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { Aproved, Clock, Play, Rejected } from "../../Icons/Icons";
 import { dataOb } from "../../interfaces";
+
 // -----------
 
 function SearchCard({ data }: dataOb) {

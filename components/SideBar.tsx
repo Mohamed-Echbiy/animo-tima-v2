@@ -3,6 +3,7 @@ import { ArrowLeft, Burgger, Search } from "../Icons/Icons";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import Gener from "./Gener";
 
 function SideBar() {
   const { route } = useRouter();
@@ -37,7 +38,7 @@ function SideBar() {
         break;
     }
     const randomid = () => {
-      let a = Math.floor(Math.random() * 1500);
+      let a = Math.floor(Math.random() * 2000);
       setRandomId(a);
     };
     randomid();
@@ -49,7 +50,7 @@ function SideBar() {
   };
   return (
     <>
-      <button className="burgger" onClick={Displaymenu}>
+      <button className="burgger z-50" onClick={Displaymenu}>
         <Burgger />
       </button>
       <div className={`menu flex flex-col py-3 bg-gray-700 ${menu && "open"} `}>
@@ -83,7 +84,9 @@ function SideBar() {
         </SearchBar>
         <div className="items flex flex-col">
           <Link href={`/random/${randomId}`}>
-            <a title="watch a random anime"> Random</a>
+            <a title="watch a random anime" target="_blank">
+              Random
+            </a>
           </Link>
           <Link href="/popular">
             <a
@@ -150,10 +153,9 @@ function SideBar() {
               Top Upcoming
             </a>
           </Link>
-          <h3 className="p-3 font-semibold text-xl">
-            Genre <span></span>
-          </h3>
+          <h3 className="p-3 font-semibold text-xl">Genre:</h3>
         </div>
+        <Gener />
         <Login className="login_btn">login</Login>
       </div>
     </>
