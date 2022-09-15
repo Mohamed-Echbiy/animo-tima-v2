@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { nanoid } from "nanoid";
 import Link from "next/link";
 import styled from "styled-components";
 import { anime } from "../../interfaces";
@@ -17,7 +18,7 @@ function TopMovies() {
   // console.log(data);
   const result = data.map((anime: anime) => {
     return (
-      <div className={`list`}>
+      <div className={`list`} key={nanoid()}>
         <div className="list_image">
           <Link href={`/detail/${anime.mal_id}`}>
             <a title="">

@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Header from "../components/Header";
 import HeroSlide from "../components/Home/HeroSlide";
+import RecentEpisodes from "../components/Home/RecentEpisodes";
 import TopLists from "../components/Home/TopLists";
 
 const Home: NextPage = (hero_data: any) => {
@@ -20,7 +21,8 @@ const Home: NextPage = (hero_data: any) => {
       <Header />
       <main className="">
         <HeroSlide data={hero_data} />
-        <TopLists />
+        {/* <TopLists /> */}
+        <RecentEpisodes />
       </main>
     </div>
   );

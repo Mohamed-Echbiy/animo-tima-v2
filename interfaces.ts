@@ -561,3 +561,31 @@ export interface anime {
     }
   ];
 }
+export interface recentEp {
+  entry: {
+    mal_id: 0;
+    url: "string";
+    images: {
+      jpg: {
+        image_url: "string";
+        small_image_url: "string";
+        large_image_url: "string";
+      };
+      webp: {
+        image_url: "string";
+        small_image_url: "string";
+        large_image_url: "string";
+      };
+    };
+    title: "string";
+  };
+  episodes: [
+    {
+      mal_id: "string";
+      url: "string";
+      title: "string";
+      premium: true;
+    }
+  ];
+  region_locked: true;
+}
