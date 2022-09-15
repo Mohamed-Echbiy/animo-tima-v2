@@ -1,20 +1,29 @@
 import React from "react";
 import styled from "styled-components";
+import TopFav from "./TopFav";
+import TopMovies from "./TopMovies";
+import TopUpcoming from "./TopUpcoming";
 
-import Top from "./Top";
-
-function TopLists({ data }) {
-  //   console.log(data);
-  const { hero_top_data, pop_data, complete_data } = data;
+function TopLists() {
   return (
     <TopList_Container>
-      <Top data={hero_top_data} />
-      <Top data={pop_data} />
-      <Top data={complete_data} />
+      <TopFav />
+      <TopUpcoming />
+      <TopMovies />
     </TopList_Container>
   );
 }
 
 export default TopLists;
 
-const TopList_Container = styled.div``;
+const TopList_Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1800px;
+  margin: auto;
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+`;

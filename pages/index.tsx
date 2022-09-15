@@ -20,7 +20,7 @@ const Home: NextPage = (hero_data: any) => {
       <Header />
       <main className="">
         <HeroSlide data={hero_data} />
-        <TopLists data={{ hero_data, pop_data, complete_data }} />
+        <TopLists />
       </main>
     </div>
   );
@@ -33,24 +33,10 @@ export const getStaticProps = async () => {
     `https://api.jikan.moe/v4/top/anime?filter=airing`
   );
   const hero_data = await hero_res.json();
-  const hero_top = await fetch(
-    `https://api.jikan.moe/v4/top/anime?filter=favorite`
-  );
-  const hero_top_data = await hero_top.json();
-  const pop_hero = await fetch(
-    `https://api.jikan.moe/v4/top/anime?filter=bypopularity`
-  );
-  const pop_data = await pop_hero.json();
-  const complete_hero = await fetch(
-    `https://api.jikan.moe/v4/anime?status=complete&order_by=rating`
-  );
-  const complete_data = await complete_hero.json();
+
   return {
     props: {
       hero_data,
-      hero_top_data,
-      pop_data,
-      complete_data,
     },
   };
 };
