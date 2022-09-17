@@ -46,7 +46,7 @@ function TopFav() {
   });
 
   return (
-    <Top_Fav className="top_fav px-2 md:px-4 lg:px-6">
+    <Top_Fav className="top_fav">
       <h1 className="List_Header py-5 font-semibold">Favorite</h1>
       <>{result}</>
       <div className="more_details py-5 font-semibold">
@@ -61,9 +61,10 @@ function TopFav() {
 export default TopFav;
 
 export const Top_Fav = styled.main`
-  width: 25%;
+  width: 24.5%;
   margin-bottom: 1.3rem;
   min-width: 320px;
+  margin-right: 0.5%;
   .list {
     display: flex;
     flex-wrap: wrap;

@@ -10,7 +10,7 @@ function RecentEpisodes() {
   const fetchData = async () => {
     const res = await fetch(`https://api.jikan.moe/v4/watch/episodes`);
     const data = await res.json();
-    return data.data;
+    return data.data.slice(0, 12);
   };
   const { data, isLoading, isError } = useQuery(["recentep"], fetchData, {
     refetchInterval: (data, isError) => (isError ? 2000 : 0),
@@ -58,7 +58,17 @@ function RecentEpisodes() {
   console.log(data);
   return (
     <Recent_Episodes>
-      <h1 className="w-full text-xl md:text-4xl">Recently Updated :</h1>
+      <div className="text-container flex justify-between items-center w-full">
+        <h1 className="w-full text-lg md:text-3xl">Recently Updated :</h1>
+        <Link href={`/latest_episodes`}>
+          <a
+            title="watch all recent episodes"
+            className="text-xs sm:text-sm md:text-base text-gray-400"
+          >
+            view more {`>>`}
+          </a>
+        </Link>
+      </div>
       <>{results}</>
     </Recent_Episodes>
   );
@@ -66,21 +76,25 @@ function RecentEpisodes() {
 
 export default RecentEpisodes;
 
-const Recent_Episodes = styled.main`
-  h1 {
+export const Recent_Episodes = styled.main`
+  .text-container {
     color: gold;
     padding: 10px;
     margin-bottom: 4rem;
+    a {
+      min-width: fit-content;
+    }
   }
 
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 10px;
   margin: auto;
   .episode_item {
     margin-bottom: 2rem;
     width: 16%;
+    margin-right: 0.666%;
     min-width: 145px;
     position: relative;
     overflow: hidden;

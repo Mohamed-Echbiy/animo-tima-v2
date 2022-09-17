@@ -8,7 +8,6 @@ import NotFound from "../NotFound";
 
 function Episodes({ id }: Number | any) {
   const [Page, setPage] = useState(1);
-  const [ImageLoad, setImageLoad] = useState(false);
   const FetchEpisodes = async () => {
     const res = await fetch(
       `https://api.jikan.moe/v4/anime/${id}/videos/episodes?page=${Page}`
@@ -16,10 +15,18 @@ function Episodes({ id }: Number | any) {
     const data = await res.json();
     return data;
   };
-  const { data, isLoading } = useQuery(["Episodes", Page], FetchEpisodes, {
-    keepPreviousData: true,
-  });
+  const { data, isLoading, isError } = useQuery(
+    ["Episodes", Page],
+    FetchEpisodes,
+    {
+      keepPreviousData: true,
+      refetchInterval: (data, isError) => (isError ? 2000 : 0),
+    }
+  );
   if (isLoading) {
+    return <></>;
+  }
+  if (isError) {
     return <></>;
   }
   // DESTRUCTION
@@ -28,51 +35,54 @@ function Episodes({ id }: Number | any) {
   return (
     <Episodes_Container className="mt-10 px-4 md:px-2 lg:px-3 xl:px-5 2xl:px-10">
       <h1>Episodes : </h1>
-      <Buttons>
-        {data.pagination.last_visible_page !== 1 && (
-          <>
-            <button
-              disabled={Page <= 1}
-              onClick={() => setPage((pre) => pre - 1)}
-            >
-              prev
-            </button>
-            <button
-              disabled={!data.pagination.has_next_page}
-              onClick={() => setPage((pre) => pre + 1)}
-            >
-              next
-            </button>
-          </>
-        )}
-      </Buttons>
-      {results.length < 1 ? (
-        <NotFound />
-      ) : (
+      {pagination && (
         <>
-          <Content>
-            {results.map((e: EpisodeVideos) => (
-              <div key={nanoid()}>
-                <div className="episode">
-                  <img
-                    src={e.images.jpg.image_url}
-                    width="100"
-                    height="100"
-                    alt={e.episode}
-                    onLoad={() => setImageLoad((pre) => true)}
-                  />
+          <Buttons>
+            {pagination.last_visible_page !== 1 && (
+              <>
+                <button
+                  disabled={Page <= 1}
+                  onClick={() => setPage((pre) => pre - 1)}
+                >
+                  prev
+                </button>
+                <button
+                  disabled={!data.pagination.has_next_page}
+                  onClick={() => setPage((pre) => pre + 1)}
+                >
+                  next
+                </button>
+              </>
+            )}
+          </Buttons>
+          {results.length < 1 ? (
+            <NotFound />
+          ) : (
+            <>
+              <Content>
+                {results.map((e: EpisodeVideos) => (
+                  <div key={nanoid()}>
+                    <div className="episode">
+                      <img
+                        src={e.images.jpg.image_url}
+                        width="100"
+                        height="100"
+                        alt={e.episode}
+                        onErrorCapture={() => console.log("error")}
+                      />
 
-                  <div className="play_button w-7 md:w-9 lg:w-11 xl:w-14 2xl:w-16">
-                    <a href={e.url} title="watch the episode">
-                      <Play />
-                    </a>
+                      <div className="play_button">
+                        <a href={e.url} title="watch the episode">
+                          <Play />
+                        </a>
+                      </div>
+                      <p>{e.episode}</p>
+                    </div>
                   </div>
-                  {!ImageLoad && <div className="loading shine"></div>}
-                  <p>{e.episode}</p>
-                </div>
-              </div>
-            ))}
-          </Content>
+                ))}
+              </Content>
+            </>
+          )}
         </>
       )}
     </Episodes_Container>
@@ -107,12 +117,18 @@ const Content = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
   position: relative;
-  div {
-    width: 24%;
+  margin: auto;
+  @media (max-width: 420px) {
+    justify-content: space-around;
   }
-  .loading {
+  div {
+    width: 19.5%;
+    margin-right: 0.5%;
+    min-width: 135px;
+  }
+  /* .loading {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -125,10 +141,10 @@ const Content = styled.div`
     top: 0px;
     left: 0px;
     border-radius: 10px 10px 0px 0px;
-  }
+  } */
   .episode {
     width: 100%;
-    min-width: 140px;
+    min-width: 135px;
     max-width: 420px;
     margin-bottom: 1rem;
     position: relative;
@@ -140,12 +156,23 @@ const Content = styled.div`
     }
     .play_button {
       position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      svg {
-        width: 100%;
-        height: 100%;
+      top: 0%;
+      left: 0%;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      a {
+        width: 20%;
+        height: 20%;
+        svg {
+          width: 100%;
+          height: 100%;
+          margin: auto;
+          transform: translateY(-50%);
+        }
       }
     }
     p {

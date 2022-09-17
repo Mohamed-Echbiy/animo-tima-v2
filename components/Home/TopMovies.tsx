@@ -42,7 +42,7 @@ function TopMovies() {
   });
 
   return (
-    <Top_Movies className="top_movies px-2 md:px-4 lg:px-6">
+    <Top_Movies className="top_movies">
       <h1 className="List_Header py-5 font-semibold">Movies</h1>
       <>{result}</>
       <div className="more_details py-5 font-semibold">

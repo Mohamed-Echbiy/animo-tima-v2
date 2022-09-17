@@ -3,6 +3,7 @@ import Head from "next/head";
 import { fullData } from "../../interfaces";
 import Characters from "../../components/Detail/Character";
 import Episodes from "../../components/Detail/Episodes";
+import Recommendation from "../../components/Detail/Recommendation";
 
 function id({ data }: fullData) {
   const { data: result } = data;
@@ -18,6 +19,7 @@ function id({ data }: fullData) {
       <main className="Container">
         <DetailHero data={result} />
         <Characters id={result.mal_id} />
+        <Recommendation id={result.mal_id} />
         <Episodes id={result.mal_id} />
       </main>
     </>

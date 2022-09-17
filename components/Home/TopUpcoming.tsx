@@ -45,7 +45,7 @@ function TopUpcoming() {
   });
 
   return (
-    <Top_Upcoming className="top_fav px-2 md:px-4 lg:px-6">
+    <Top_Upcoming className="top_fav">
       <h1 className="List_Header py-5 font-semibold">Upcoming</h1>
       <>{result}</>
       <div className="more_details py-5 font-semibold">
