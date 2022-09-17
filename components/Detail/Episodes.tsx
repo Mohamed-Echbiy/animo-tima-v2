@@ -16,7 +16,7 @@ function Episodes({ id }: Number | any) {
     return data;
   };
   const { data, isLoading, isError } = useQuery(
-    ["Episodes", Page],
+    ["Episodes", Page, id],
     FetchEpisodes,
     {
       keepPreviousData: true,

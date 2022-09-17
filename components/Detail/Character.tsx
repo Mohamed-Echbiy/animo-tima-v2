@@ -16,7 +16,10 @@ function Characters({ id }: Number | any) {
     const data = await res.json();
     return data;
   };
-  const { data, isLoading, isError } = useQuery(["charcters"], fetchChracter);
+  const { data, isLoading, isError } = useQuery(
+    ["charcters", id],
+    fetchChracter
+  );
 
   if (isLoading) {
     return <></>;
@@ -28,59 +31,60 @@ function Characters({ id }: Number | any) {
       <Swiper
         modules={[Navigation]}
         navigation
-        spaceBetween={50}
+        spaceBetween={10}
         slidesPerView={0}
         grabCursor={true}
         breakpoints={{
           300: {
             width: 300,
-            slidesPerView: 1,
+            slidesPerView: 2,
           },
           768: {
             width: 760,
-            slidesPerView: 3,
+            slidesPerView: 4,
           },
           1024: {
             width: 1024,
-            slidesPerView: 4,
+            slidesPerView: 5,
           },
           1280: {
             width: 1280,
-            slidesPerView: 5,
+            slidesPerView: 6,
           },
           1536: {
             width: 1536,
-            slidesPerView: 5,
+            slidesPerView: 7,
           },
         }}
         className="SwiperContainer px-1 md:px-2 lg:px-4 xl:px-5 2xl:px-6"
       >
-        {results.map(
-          (chara: {
-            character: {
-              images: { webp: { image_url: string | undefined } };
-              name: string | undefined;
-            };
-          }) => (
-            <SwiperSlide
-              key={nanoid()}
-              className="SwiperContainer__Image py-16 "
-            >
-              <div className="container__swiper relative">
-                <h2 className="charachter__name py-1 text-center font-semibold text-gray-300">
-                  {chara.character.name}
-                </h2>
-                <img
-                  src={chara.character.images.webp.image_url}
-                  alt={chara.character.name}
-                  title={chara.character.name}
-                  onLoad={() => setImageLoad((pre) => true)}
-                />
-                {!ImageLoad && <div className="loading shine"></div>}
-              </div>
-            </SwiperSlide>
-          )
-        )}
+        {results &&
+          results.map(
+            (chara: {
+              character: {
+                images: { webp: { image_url: string | undefined } };
+                name: string | undefined;
+              };
+            }) => (
+              <SwiperSlide
+                key={nanoid()}
+                className="SwiperContainer__Image py-16 "
+              >
+                <div className="container__swiper relative">
+                  <h2 className="charachter__name py-1 text-center mb-2 font-semibold text-gray-300 text-xs sm:text-sm md:text-base">
+                    {chara.character.name}
+                  </h2>
+                  <img
+                    src={chara.character.images.webp.image_url}
+                    alt={chara.character.name}
+                    title={chara.character.name}
+                    onLoad={() => setImageLoad((pre) => true)}
+                  />
+                  {!ImageLoad && <div className="loading shine"></div>}
+                </div>
+              </SwiperSlide>
+            )
+          )}
       </Swiper>
     </Div>
   );
@@ -121,7 +125,7 @@ const Div = styled.main`
       font-weight: bold;
       @media (max-width: 420px) {
         &::after {
-          font-size: 30px;
+          font-size: 20px;
         }
       }
     }
@@ -130,6 +134,7 @@ const Div = styled.main`
     img {
       width: 100%;
       margin: auto;
+      aspect-ratio: 0.7;
     }
   }
 `;
