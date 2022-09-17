@@ -4,7 +4,6 @@ import Link from "next/link";
 import styled from "styled-components";
 import { anime } from "../../interfaces";
 import { Top_Fav } from "./TopFav";
-
 function TopMovies() {
   const fetchData = async () => {
     const res = await fetch(`https://api.jikan.moe/v4/top/anime?type=movie`);

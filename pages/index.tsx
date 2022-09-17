@@ -21,8 +21,10 @@ const Home: NextPage = (hero_data: any) => {
       <Header />
       <main className="">
         <HeroSlide data={hero_data} />
-        {/* <TopLists /> */}
-        <RecentEpisodes />
+        <div className="main_info  px-1 sm:px-2 md:px-3 lg:px-5 xl:px-7 2xl:px-10">
+          <TopLists />
+          <RecentEpisodes />
+        </div>
       </main>
     </div>
   );

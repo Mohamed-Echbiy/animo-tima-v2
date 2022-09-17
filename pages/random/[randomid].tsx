@@ -7,7 +7,6 @@ import { fullData } from "../../interfaces";
 
 export default function randomids({ data }: fullData) {
   const { data: result } = data;
-  console.log(result.mal_id);
   return (
     <>
       <Head>

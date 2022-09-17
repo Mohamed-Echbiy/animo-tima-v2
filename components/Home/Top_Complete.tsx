@@ -3,18 +3,19 @@ import { nanoid } from "nanoid";
 import Link from "next/link";
 import styled from "styled-components";
 import { anime } from "../../interfaces";
+import { Top_Fav } from "./TopFav";
 
 // this a component for top favourite
 
-function TopFav() {
+function TopComplete() {
   const fetchData = async () => {
     const res = await fetch(
-      `https://api.jikan.moe/v4/top/anime?filter=favorite`
+      `https://api.jikan.moe/v4/anime?status=complete&order_by=scored_by&sort=desc`
     );
     const data = await res.json();
     return data.data.slice(0, 5);
   };
-  const { data, isLoading, isError } = useQuery(["data"], fetchData);
+  const { data, isLoading, isError } = useQuery(["Complete_data"], fetchData);
   if (isLoading) {
     return <></>;
   }
@@ -46,61 +47,18 @@ function TopFav() {
   });
 
   return (
-    <Top_Fav className="top_fav px-2 md:px-4 lg:px-6">
-      <h1 className="List_Header py-5 font-semibold">Favorite</h1>
+    <Top_Complete className="top_complete px-2 md:px-4 lg:px-6">
+      <h1 className="List_Header py-5 font-semibold">Completed</h1>
       <>{result}</>
       <div className="more_details py-5 font-semibold">
-        <Link href={`/popular`}>
+        <Link href={`/completed`}>
           <a title="more_details">More Details</a>
         </Link>
       </div>
-    </Top_Fav>
+    </Top_Complete>
   );
 }
 
-export default TopFav;
+export default TopComplete;
 
-export const Top_Fav = styled.main`
-  width: 25%;
-  margin-bottom: 1.3rem;
-  min-width: 320px;
-  .list {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #4a4b51;
-    .list_image {
-      width: 80px;
-      img {
-        width: 100%;
-      }
-    }
-    .anime_information {
-      width: calc(100% - 88px);
-      height: 120px;
-    }
-  }
-  .more_details,
-  .List_Header {
-    width: 100%;
-    text-align: center;
-    background-color: #4a4b51;
-    font-size: 1.3rem;
-    padding-left: 20px;
-    letter-spacing: 1.5px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-  .List_Header {
-    color: gold;
-    font-size: 1.5rem;
-    text-align: start;
-    border-radius: 0px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-  & .list:nth-child(2),
-  & .list:nth-child(4),
-  & .list:nth-child(6) {
-    background-color: #414248;
-  }
-`;
+const Top_Complete = styled(Top_Fav)``;

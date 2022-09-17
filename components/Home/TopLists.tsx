@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TopFav from "./TopFav";
 import TopMovies from "./TopMovies";
 import TopUpcoming from "./TopUpcoming";
+import TopComplete from "./Top_Complete";
 
 function TopLists() {
   return (
@@ -10,6 +11,7 @@ function TopLists() {
       <TopFav />
       <TopUpcoming />
       <TopMovies />
+      <TopComplete />
     </TopList_Container>
   );
 }
@@ -22,7 +24,6 @@ const TopList_Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 1800px;
   margin: auto;
   margin-top: 6rem;
   margin-bottom: 6rem;

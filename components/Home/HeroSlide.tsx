@@ -231,7 +231,7 @@ function HeroSlide({ data }: hero_data | any) {
                       alt="hero image"
                     />
                   </Image>
-                  <Info className="px-3 md:px-5 lg:px-8 xl:px-6 2xl:px-10">
+                  <Info className="px-1 sm:px-2 md:px-3 lg:px-5 xl:px-7 2xl:px-10">
                     <h1 className="text-3xl lg:text-5xl xl:text-6xl 2xl:text-7xl mb-6 font-semibold">
                       {anime.title}
                     </h1>

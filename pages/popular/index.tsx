@@ -3,7 +3,7 @@ import Head from "next/head";
 import Header from "../../components/Header";
 import SearchCard from "../../components/serach/SearchCard";
 
-interface Movie_card_types {
+export interface Movie_card_types {
   mal_id: number;
   url: "string";
   images: {
@@ -77,11 +77,10 @@ interface Movie_card_types {
     { mal_id: number; type: "string"; name: "string"; url: "string" }
   ];
 }
-interface Data_type {
+export interface Data_type {
   data: [Movie_card_types];
 }
 function index({ data }: Data_type) {
-  console.log(data);
   return (
     <>
       <div className="most__popular__container flex flex-wrap justify-center">
