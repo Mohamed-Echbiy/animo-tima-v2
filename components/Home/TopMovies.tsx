@@ -10,7 +10,9 @@ function TopMovies() {
     const data = await res.json();
     return data.data.slice(0, 5);
   };
-  const { data, isLoading, isError } = useQuery(["dataMovies"], fetchData);
+  const { data, isLoading, isError } = useQuery(["dataMovies"], fetchData, {
+    staleTime: 3000 * 100,
+  });
   if (isLoading) {
     return <></>;
   }

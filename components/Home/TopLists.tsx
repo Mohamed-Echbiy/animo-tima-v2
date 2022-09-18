@@ -21,7 +21,7 @@ export default TopLists;
 const TopList_Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   width: 100%;
   margin: auto;

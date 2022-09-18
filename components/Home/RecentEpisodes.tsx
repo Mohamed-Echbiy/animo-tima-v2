@@ -55,7 +55,6 @@ function RecentEpisodes() {
       </div>
     </div>
   ));
-  console.log(data);
   return (
     <Recent_Episodes>
       <div className="text-container flex justify-between items-center w-full">
@@ -88,7 +87,7 @@ export const Recent_Episodes = styled.main`
 
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   padding: 10px;
   margin: auto;
   .episode_item {
@@ -98,6 +97,7 @@ export const Recent_Episodes = styled.main`
     min-width: 145px;
     position: relative;
     overflow: hidden;
+    flex-grow: 1;
     .image_container {
       width: 100%;
       img {

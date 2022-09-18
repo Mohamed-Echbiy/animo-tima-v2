@@ -1,37 +1,57 @@
 import { useQuery } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
+import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
 import { Play } from "../../Icons/Icons";
 import { EpisodeVideos } from "../../interfaces";
 import NotFound from "../NotFound";
 
-function Episodes({ id }: Number | any) {
+function Episodes({ name }: [string, number] | any) {
+  const Name = name[0]
+    .split("")
+    .map((letter: string) => {
+      if (letter === " ") {
+        return "-";
+      } else if (
+        letter === "?" ||
+        letter === "!" ||
+        letter === ":" ||
+        letter === ";"
+      ) {
+        return "";
+      } else {
+        return letter;
+      }
+    })
+    .join("");
+  const [, id] = name;
   const [Page, setPage] = useState(1);
   const FetchEpisodes = async () => {
     const res = await fetch(
       `https://api.jikan.moe/v4/anime/${id}/videos/episodes?page=${Page}`
     );
     const data = await res.json();
-    return data;
+    return { data };
   };
   const { data, isLoading, isError } = useQuery(
-    ["Episodes", Page, id],
+    ["Episodes", Page, name],
     FetchEpisodes,
     {
       keepPreviousData: true,
-      refetchInterval: (data, isError) => (isError ? 2000 : 0),
+      refetchInterval: (isError) => (isError ? 2500 : 0),
     }
   );
   if (isLoading) {
     return <></>;
   }
+
   if (isError) {
     return <></>;
   }
   // DESTRUCTION
-  const { data: results, pagination } = data;
-  // console.log(data);
+  const { data: Allresults } = data;
+  const { data: results, pagination } = Allresults;
   return (
     <Episodes_Container className="mt-10 px-4 md:px-2 lg:px-3 xl:px-5 2xl:px-10">
       <h1>Episodes : </h1>
@@ -47,7 +67,7 @@ function Episodes({ id }: Number | any) {
                   prev
                 </button>
                 <button
-                  disabled={!data.pagination.has_next_page}
+                  disabled={!pagination.has_next_page}
                   onClick={() => setPage((pre) => pre + 1)}
                 >
                   next
@@ -72,9 +92,11 @@ function Episodes({ id }: Number | any) {
                       />
 
                       <div className="play_button">
-                        <a href={e.url} title="watch the episode">
-                          <Play />
-                        </a>
+                        <Link href={`/watch/${Name}-episode-${e.mal_id}`}>
+                          <a title="watch the episode">
+                            <Play />
+                          </a>
+                        </Link>
                       </div>
                       <p>{e.episode}</p>
                     </div>
@@ -182,3 +204,5 @@ const Content = styled.div`
     }
   }
 `;
+/**
+ */

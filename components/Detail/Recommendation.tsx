@@ -2,13 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import NoRecommendation from "./NoRecommendation";
-import { Recent_Episodes } from "../Home/RecentEpisodes";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import { nanoid } from "nanoid";
 import Link from "next/link";
-import { Play } from "../../Icons/Icons";
 import { recentEp } from "../../interfaces";
 import styled from "styled-components";
 
@@ -27,7 +25,7 @@ function Recommendation({ id }: number | any) {
   if (isLoading) {
     return <></>;
   }
-  console.log(data);
+
   if (data.length === 0) {
     return (
       <>

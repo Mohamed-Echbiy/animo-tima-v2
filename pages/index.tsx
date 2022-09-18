@@ -3,6 +3,7 @@ import Head from "next/head";
 import Header from "../components/Header";
 import HeroSlide from "../components/Home/HeroSlide";
 import RecentEpisodes from "../components/Home/RecentEpisodes";
+import RecentPromos from "../components/Home/RecentPromos";
 import TopLists from "../components/Home/TopLists";
 
 const Home: NextPage = (hero_data: any) => {
@@ -20,9 +21,10 @@ const Home: NextPage = (hero_data: any) => {
       <Header />
       <main className="">
         <HeroSlide data={hero_data} />
-        <div className="main_info  px-1 sm:px-2 md:px-3 lg:px-5 xl:px-7">
+        <div className="main_info  px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7">
           <TopLists />
           <RecentEpisodes />
+          <RecentPromos />
         </div>
       </main>
     </div>
