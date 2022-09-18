@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Youtube, { YouTubeProps } from "react-youtube";
 import React from "react";
 import styled from "styled-components";
+import { nanoid } from "nanoid";
 
 function RecentPromos() {
   const fetchData = async () => {
@@ -33,6 +34,7 @@ function RecentPromos() {
         opts={opts}
         loading={"lazy"}
         className="video mb-5"
+        key={nanoid()}
       />
     )
   );

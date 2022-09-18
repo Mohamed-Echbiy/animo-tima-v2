@@ -17,7 +17,9 @@ function Episodes({ name }: [string, number] | any) {
         letter === "?" ||
         letter === "!" ||
         letter === ":" ||
-        letter === ";"
+        letter === ";" ||
+        letter === "(" ||
+        letter === ")"
       ) {
         return "";
       } else {
@@ -25,6 +27,7 @@ function Episodes({ name }: [string, number] | any) {
       }
     })
     .join("");
+  // console.log(Name);
   const [, id] = name;
   const [Page, setPage] = useState(1);
   const FetchEpisodes = async () => {
@@ -92,7 +95,7 @@ function Episodes({ name }: [string, number] | any) {
                       />
 
                       <div className="play_button">
-                        <Link href={`/watch/${Name}-episode-${e.mal_id}`}>
+                        <Link href={`/watch/${id}_${Name}-episode-${e.mal_id}`}>
                           <a title="watch the episode">
                             <Play />
                           </a>
