@@ -7,7 +7,7 @@ function NoRecommendation() {
     <div className="px-4">
       <NoRecommendation_Container>
         <div className="image__NoRecommendation">
-          <img src="/luffy_Chibi2.png" alt="not found image for luffy" />
+          <img src="/Luffy_Chibi2.png" alt="not found image for luffy" />
         </div>
         <div className="para__NoRecommendation">
           <h1>Sorry</h1>

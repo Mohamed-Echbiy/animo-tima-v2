@@ -34,9 +34,9 @@ function Recommendation({ id }: number | any) {
     );
   }
   const result = data.map((anime: recentEp) => (
-    <SwiperSlide className=" py-24">
+    <SwiperSlide key={nanoid()} className=" py-24">
       <Recommended_Anime>
-        <div key={nanoid()} className="Recommended_item">
+        <div className="Recommended_item">
           <div className="image_container">
             <Link href={`/detail/${anime.entry.mal_id}`}>
               <a title="go to detail page">

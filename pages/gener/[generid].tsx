@@ -107,7 +107,6 @@ function Gener({ data }: data) {
   if (isLoading) {
     return <></>;
   }
-  console.log(client);
   const results = client.data.map((result: result | any) => (
     <SearchCard key={result.mal_id} data={result} />
   ));

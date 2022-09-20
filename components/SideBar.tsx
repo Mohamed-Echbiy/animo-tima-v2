@@ -7,7 +7,6 @@ import Gener from "./Gener";
 
 function SideBar() {
   const { route } = useRouter();
-  // console.log(route);
   const [active, setActive] = useState(0);
   const [randomId, setRandomId] = useState(1);
   useEffect(() => {

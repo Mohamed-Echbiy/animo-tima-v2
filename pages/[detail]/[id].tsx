@@ -4,13 +4,14 @@ import { fullData } from "../../interfaces";
 import Characters from "../../components/Detail/Character";
 import Episodes from "../../components/Detail/Episodes";
 import Recommendation from "../../components/Detail/Recommendation";
+import AnimeStatic from "../../components/Detail/AnimeStatic";
 
 function id({ data }: fullData) {
   const { data: result } = data;
   return (
     <>
       <Head>
-        <title>{result.title}</title>
+        <title>{result ? result.title : "AnimoTime"}</title>
         <meta
           name="description"
           content="animo time a website to watch your favorite anime online without any ads"
@@ -18,6 +19,7 @@ function id({ data }: fullData) {
       </Head>
       <main className="Container">
         <DetailHero data={result} />
+        <AnimeStatic id={result.mal_id} />
         <Characters id={result.mal_id} />
         <Recommendation id={result.mal_id} />
         <Episodes name={[result.title, result.mal_id]} />

@@ -53,17 +53,19 @@ export default SearchCard;
 // ------------------------
 export const Div = styled.div`
   display: block;
-  width: 300px;
-  margin: 0px 1rem;
-  margin-bottom: 50px;
+  width: 16%;
+  margin-right: 0.5%;
+  margin-bottom: 20px;
   position: relative;
   border-radius: 10px;
+  min-width: 120px;
   .cover_image {
-    height: 410px;
+    height: auto;
     img {
       height: 100%;
       width: 100%;
       border-radius: 10px;
+      aspect-ratio: 0.7;
     }
   }
   .info {

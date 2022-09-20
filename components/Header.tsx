@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 function Header() {
   const [inputSearch, setInputSearch] = useState("unkown");
   const { route } = useRouter();
-  // console.log(route);
   const [active, setActive] = useState(0);
   const [randomId, setRandomId] = useState(1);
   useEffect(() => {
@@ -36,7 +35,6 @@ function Header() {
     };
     randomid();
   }, []);
-  // console.log(active);
 
   return (
     <>

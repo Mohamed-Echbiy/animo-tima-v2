@@ -27,7 +27,7 @@ function Episodes({ name }: [string, number] | any) {
       }
     })
     .join("");
-  // console.log(Name);
+
   const [, id] = name;
   const [Page, setPage] = useState(1);
   const FetchEpisodes = async () => {
@@ -42,24 +42,28 @@ function Episodes({ name }: [string, number] | any) {
     FetchEpisodes,
     {
       keepPreviousData: true,
-      refetchInterval: (isError) => (isError ? 2500 : 0),
+      refetchInterval: (isError) => (isError ? 1000 : 0),
+      staleTime: 60000 * 60 * 24,
     }
   );
   if (isLoading) {
-    return <></>;
+    return <h1>Please Wait we loading the Episodes</h1>;
   }
-
   if (isError) {
-    return <></>;
+    return (
+      <>
+        <NotFound />
+      </>
+    );
   }
   // DESTRUCTION
   const { data: Allresults } = data;
   const { data: results, pagination } = Allresults;
   return (
     <Episodes_Container className="mt-10 px-4 md:px-2 lg:px-3 xl:px-5 2xl:px-10">
-      <h1>Episodes : </h1>
       {pagination && (
         <>
+          <h1>Episodes : </h1>
           <Buttons>
             {pagination.last_visible_page !== 1 && (
               <>
@@ -79,7 +83,15 @@ function Episodes({ name }: [string, number] | any) {
             )}
           </Buttons>
           {results.length < 1 ? (
-            <NotFound />
+            <div className="w-full flex justify-center items-center mb-10">
+              <button className="px-4 py-2 border-2 rounded border-lime-600 border-solid hover:scale-110 ease-in ">
+                <Link href={`/watch/${id}_${Name}-episode-1`}>
+                  <a className="text-xl md:text-3xl" title="watch The movie">
+                    Watch 👀
+                  </a>
+                </Link>
+              </button>
+            </div>
           ) : (
             <>
               <Content>
@@ -91,7 +103,6 @@ function Episodes({ name }: [string, number] | any) {
                         width="100"
                         height="100"
                         alt={e.episode}
-                        onErrorCapture={() => console.log("error")}
                       />
 
                       <div className="play_button">
@@ -101,7 +112,9 @@ function Episodes({ name }: [string, number] | any) {
                           </a>
                         </Link>
                       </div>
-                      <p>{e.episode}</p>
+                      <p className="text-xs md:text-sm xl:text-base">
+                        {e.episode}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -120,7 +133,7 @@ const Episodes_Container = styled.main`
   h1 {
     font-size: 2rem;
     color: gold;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
   }
 `;
 const Buttons = styled.div`

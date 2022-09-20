@@ -140,8 +140,6 @@ interface hero_data {
 
 function HeroSlide({ data }: hero_data | any) {
   const { hero_data } = data;
-  // console.log(hero_data);
-
   return (
     <HeroSlider>
       <Swiper

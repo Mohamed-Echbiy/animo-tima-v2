@@ -2,9 +2,10 @@ import { nanoid } from "nanoid";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
+import ReactPlayer from "react-player/lazy";
 import styled from "styled-components";
 import Header from "../../components/Header";
+import NotFound from "../../components/NotFound";
 import { anime } from "../../interfaces";
 
 function id({
@@ -16,6 +17,7 @@ function id({
     string
   ];
 }) {
+  const [episodeAvailble, setEpAvailble] = useState(true);
   const [episodeData, details, epId] = data;
   const { data: results } = details;
   const episodeId = epId.slice(0, epId.lastIndexOf("-"));
@@ -28,7 +30,11 @@ function id({
     if (typeof window !== "undefined") {
       setHasWindow(true);
     }
+    if (episodeData.sources === undefined) {
+      setEpAvailble(false);
+    }
   }, []);
+
   return (
     <>
       <Head>
@@ -49,14 +55,19 @@ function id({
         />
         {hasWindow && (
           <>
-            <ReactPlayer
-              url={episodeData.sources[0].file}
-              width="none"
-              height="auto"
-              controls
-              playing={true}
-              className="video flex justify-center items-center"
-            />
+            {episodeAvailble ? (
+              <ReactPlayer
+                url={episodeData.sources[0].file}
+                width="none"
+                height="auto"
+                controls
+                light={`background-color: balck`}
+                playing={true}
+                className="video flex justify-center items-center"
+              />
+            ) : (
+              <NotFound />
+            )}
           </>
         )}
         <div className="details py-2">
@@ -102,16 +113,18 @@ function id({
             </Link>
           </button>
         </div>
-        <div className="episodes_list my-10">
-          <h1 className="episodes-number text-4xl w-full mb-5">Episodes : </h1>
-          {episodes_list.map((e, index) => (
-            <Link href={`/watch/${results.mal_id}_${e}`} key={nanoid()}>
-              <a className=" w-20 h-20 mb-2 flex items-center justify-center border-solid border-lime-500 border-4 rounded-md text-2xl text-center mr-2 font-semibold  ">
-                {index + 1}
-              </a>
-            </Link>
-          ))}
-        </div>
+        {episodes_list.length > 0 && (
+          <div className="episodes_list my-10">
+            <h1 className="episodes-number text-4xl w-full mb-5">Episodes :</h1>
+            {episodes_list.map((e, index) => (
+              <Link href={`/watch/${results.mal_id}_${e}`} key={nanoid()}>
+                <a className=" w-20 h-20 mb-2 flex items-center justify-center border-solid border-lime-500 border-4 rounded-md text-2xl text-center mr-2 font-semibold  ">
+                  {index + 1}
+                </a>
+              </Link>
+            ))}
+          </div>
+        )}
       </Div>
     </>
   );
@@ -137,11 +150,15 @@ const Div = styled.div`
     aspect-ratio: 16/9;
     flex-grow: 2;
     flex-shrink: 3;
+    min-height: 200px;
+    > div {
+      background-color: black;
+      min-height: 200px;
+    }
     video {
       width: 100% !important;
       aspect-ratio: 16/9 !important;
       min-width: 300px !important;
-      border-radius: 10px;
       display: block;
       margin: auto;
     }

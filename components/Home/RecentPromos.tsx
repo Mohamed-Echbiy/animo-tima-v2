@@ -16,7 +16,6 @@ function RecentPromos() {
   if (isLoading) {
     return <></>;
   }
-  console.log(data);
   if (isError) {
     return <></>;
   }

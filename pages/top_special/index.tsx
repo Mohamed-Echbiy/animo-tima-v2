@@ -100,7 +100,7 @@ function index({ data }: Data_type) {
 export default index;
 //styling
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const resP1 = await fetch(`https://api.jikan.moe/v4/top/anime?type=special`);
   const dataP1 = await resP1.json();
   const result1 = await dataP1.data;

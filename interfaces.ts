@@ -454,6 +454,11 @@ export interface anime {
     };
   };
   trailer: {
+    images: {
+      large_image_url: string;
+      image_url: string;
+      small_image_url: string;
+    };
     youtube_id: "string";
     url: "string";
     embed_url: "string";

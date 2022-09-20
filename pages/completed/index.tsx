@@ -5,7 +5,6 @@ import SearchCard from "../../components/serach/SearchCard";
 import { Data_type, Movie_card_types } from "../popular";
 
 function index({ data }: Data_type) {
-  console.log(data);
   return (
     <>
       <div className="completed__container flex flex-wrap justify-center">
@@ -24,7 +23,7 @@ function index({ data }: Data_type) {
 
 export default index;
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   //-------------------------
   const resP1 = await fetch(
     `https://api.jikan.moe/v4/anime?status=complete&order_by=scored_by&sort=desc`

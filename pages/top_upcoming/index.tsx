@@ -99,8 +99,7 @@ function index({ data }: Data_type) {
 
 export default index;
 //styling
-
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const resP1 = await fetch(
     `https://api.jikan.moe/v4/top/anime?filter=upcoming`
   );

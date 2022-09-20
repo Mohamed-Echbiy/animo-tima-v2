@@ -19,7 +19,6 @@ function TopComplete() {
   if (isLoading) {
     return <></>;
   }
-  // console.log(data);
   const result = data.map((anime: anime) => {
     return (
       <div className={`list`} key={nanoid()}>

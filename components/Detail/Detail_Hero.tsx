@@ -34,6 +34,7 @@ function DetailHero({ data }: dataOb) {
                 height="285"
                 className="mb-2"
               />
+
               <button className="block mx-auto p-2 rounded-md w-36 border-2 hover:border-gray-900  ">
                 <a
                   href={data.trailer.url}
@@ -46,7 +47,7 @@ function DetailHero({ data }: dataOb) {
             </div>
             <div className="title_summary ml-10 flex flex-col md:flex-row md:items-center">
               <div className="summary">
-                <h1 className="title">{data.title}</h1>
+                <h1 className="title text-2xl lg:text-3xl">{data.title}</h1>
                 <p className="synposis">
                   {showMore ? data.synopsis : `${summary}...`}
                   <span
@@ -58,8 +59,8 @@ function DetailHero({ data }: dataOb) {
                 </p>
               </div>
               <div className="more_details md:ml-10">
-                <p className="title_japanese">
-                  Japanese: {data.title_japanese}
+                <p className="title_japanese text-yellow-400">
+                  {data.title_japanese}
                 </p>
                 <p className="type">Type: {data.type}</p>
                 <p className="status"> Status: {data.status}</p>
@@ -128,7 +129,6 @@ const Div_A = styled.div`
       justify-content: center;
       align-items: center;
       h1 {
-        font-size: 2.5rem;
         margin-bottom: 5px;
         font-weight: 600;
         color: gold;
@@ -138,7 +138,7 @@ const Div_A = styled.div`
       }
     }
     .more_details {
-      min-width: 300px;
+      width: 300px;
       display: flex;
       flex-direction: column;
       justify-content: center;

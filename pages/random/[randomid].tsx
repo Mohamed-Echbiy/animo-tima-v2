@@ -19,7 +19,7 @@ export default function randomids({ data }: fullData) {
       <main className="Container">
         <DetailHero data={result} />
         <Characters id={result.mal_id} />
-        <Episodes id={result.mal_id} />
+        <Episodes name={[result.title, result.mal_id]} />
       </main>
     </>
   );

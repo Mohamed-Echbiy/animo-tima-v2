@@ -100,7 +100,7 @@ function index({ data }: Data_type) {
 export default index;
 //styling
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const resP1 = await fetch(
     `https://api.jikan.moe/v4/top/anime?filter=bypopularity`
   );
@@ -117,7 +117,7 @@ export const getStaticProps = async () => {
   const dataP3 = await resP3.json();
   const result3 = await dataP3.data;
 
-  const data = [...result1, ...result2];
+  const data = [...result1, ...result2, ...result3];
 
   return {
     props: {

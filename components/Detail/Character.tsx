@@ -8,6 +8,7 @@ import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import styled from "styled-components";
+import Link from "next/link";
 
 function Characters({ id }: Number | any) {
   const [ImageLoad, setImageLoad] = useState(false);
@@ -18,10 +19,20 @@ function Characters({ id }: Number | any) {
   };
   const { data, isLoading, isError } = useQuery(
     ["charcters", id],
-    fetchChracter
+    fetchChracter,
+    {
+      refetchInterval: (isError) => (isError ? 3000 : 0),
+    }
   );
 
   if (isLoading) {
+    return (
+      <h1 className="w-full text-center text-2xl md:text-4xl">
+        Characters are Loading
+      </h1>
+    );
+  }
+  if (isError) {
     return <></>;
   }
   const { data: results } = data;
@@ -62,6 +73,7 @@ function Characters({ id }: Number | any) {
           results.map(
             (chara: {
               character: {
+                mal_id: any;
                 images: { webp: { image_url: string | undefined } };
                 name: string | undefined;
               };
@@ -74,12 +86,16 @@ function Characters({ id }: Number | any) {
                   <h2 className="charachter__name py-1 text-center mb-2 font-semibold text-gray-300 text-xs sm:text-sm md:text-base">
                     {chara.character.name}
                   </h2>
-                  <img
-                    src={chara.character.images.webp.image_url}
-                    alt={chara.character.name}
-                    title={chara.character.name}
-                    onLoad={() => setImageLoad((pre) => true)}
-                  />
+                  <Link href={`/characters/${chara.character.mal_id}`}>
+                    <a title="get character details">
+                      <img
+                        src={chara.character.images.webp.image_url}
+                        alt={chara.character.name}
+                        title={chara.character.name}
+                        onLoad={() => setImageLoad((pre) => true)}
+                      />
+                    </a>
+                  </Link>
                   {!ImageLoad && <div className="loading shine"></div>}
                 </div>
               </SwiperSlide>
@@ -120,13 +136,15 @@ const Div = styled.main`
     }
     .swiper-button-next,
     .swiper-button-prev {
-      color: #067306;
+      color: #dabc0e;
+      margin-top: 5px;
       top: 25px;
       font-weight: bold;
-      @media (max-width: 420px) {
-        &::after {
-          font-size: 20px;
-        }
+      ::after {
+        padding: 10px;
+        background-color: black;
+        border-radius: 5px;
+        font-size: 20px;
       }
     }
   }
