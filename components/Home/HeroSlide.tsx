@@ -227,6 +227,8 @@ function HeroSlide({ data }: hero_data | any) {
                     <img
                       src={anime.images.webp.large_image_url}
                       alt="hero image"
+                      width="200"
+                      height="200"
                     />
                   </Image>
                   <Info className="px-1 sm:px-2 md:px-3 lg:px-5 xl:px-7 2xl:px-10">

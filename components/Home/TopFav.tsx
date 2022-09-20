@@ -14,7 +14,7 @@ function TopFav() {
     const data = await res.json();
     return data.data.slice(0, 5);
   };
-  const { data, isLoading, isError } = useQuery(["data"], fetchData);
+  const { data, isLoading } = useQuery(["data"], fetchData);
   if (isLoading) {
     return <></>;
   }
@@ -24,7 +24,12 @@ function TopFav() {
         <div className="list_image">
           <Link href={`/detail/${anime.mal_id}`}>
             <a title="">
-              <img src={anime.images.webp.image_url} alt="cover image" />
+              <img
+                src={anime.images.webp.image_url}
+                alt="cover image"
+                width="200"
+                height="200"
+              />
             </a>
           </Link>
         </div>

@@ -29,6 +29,8 @@ function RecentEpisodes() {
             <img
               src={anime.entry.images.webp.image_url}
               alt={anime.episodes[0].title}
+              width="200"
+              height="200"
             />
           </a>
         </Link>

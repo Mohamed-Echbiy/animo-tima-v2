@@ -31,7 +31,7 @@ function RecentPromos() {
       <Youtube
         videoId={trailer.trailer.youtube_id}
         opts={opts}
-        loading={"lazy"}
+        loading="lazy"
         className="video mb-5"
         key={nanoid()}
       />

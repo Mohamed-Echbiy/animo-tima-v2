@@ -22,7 +22,12 @@ function TopMovies() {
         <div className="list_image">
           <Link href={`/detail/${anime.mal_id}`}>
             <a title="">
-              <img src={anime.images.webp.image_url} alt="cover image" />
+              <img
+                src={anime.images.webp.image_url}
+                alt="cover image"
+                width="200"
+                height="200"
+              />
             </a>
           </Link>
         </div>
