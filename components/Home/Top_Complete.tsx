@@ -25,17 +25,22 @@ function TopComplete() {
         <div className="list_image">
           <Link href={`/detail/${anime.mal_id}`}>
             <a title="">
-              <img src={anime.images.webp.image_url} alt="cover image" width="200" height="200" />
+              <img
+                src={anime.images.webp.image_url}
+                alt="cover image"
+                width="200"
+                height="200"
+              />
             </a>
           </Link>
         </div>
         <div className="anime_information ml-2">
           <div className="anime_name text-base py-4 font-semibold text-center">
-            <h3>
+            <h3 className="text-sm">
               {anime.title.slice(0, 25)} {anime.title.length > 25 && "..."}
             </h3>
           </div>
-          <div className="more_info flex justify-around items-center text-sm capitalize">
+          <div className="more_info flex justify-around items-center text-xs capitalize">
             <p>{anime.score}</p>
             <p> {anime.duration.slice(0, 2)} min </p>
             <p> {anime.type} </p>

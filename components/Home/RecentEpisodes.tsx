@@ -13,12 +13,9 @@ function RecentEpisodes() {
     return data.data.slice(0, 12);
   };
   const { data, isLoading, isError } = useQuery(["recentep"], fetchData, {
-    refetchInterval: (data, isError) => (isError ? 2000 : 0),
+    retryDelay: 2000,
   });
-  if (isLoading) {
-    return <></>;
-  }
-  if (isError) {
+  if (isLoading || isError) {
     return <></>;
   }
   const results = data.map((anime: recentEp) => (
@@ -37,7 +34,7 @@ function RecentEpisodes() {
       </div>
       <div className="info">
         <div className="title_container">
-          <h3 className="title text-center text-xs sm:text-sm md:text-base w-full px-1">
+          <h3 className="title text-center text-xs sm:text-xs md:text-sm lg:text-base w-full px-1">
             {anime.entry.title}
           </h3>
         </div>
@@ -80,8 +77,8 @@ export default RecentEpisodes;
 export const Recent_Episodes = styled.main`
   .text-container {
     color: gold;
-    padding: 10px;
-    margin-bottom: 4rem;
+    padding: 0px 10px;
+    margin-bottom: 2rem;
     a {
       min-width: fit-content;
     }
@@ -90,13 +87,12 @@ export const Recent_Episodes = styled.main`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 10px;
   margin: auto;
   .episode_item {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     width: 16%;
     margin-right: 0.666%;
-    min-width: 145px;
+    min-width: 110px;
     position: relative;
     overflow: hidden;
     flex-grow: 1;
@@ -106,6 +102,7 @@ export const Recent_Episodes = styled.main`
         object-fit: fill;
         width: 100%;
         aspect-ratio: 0.7;
+        padding: 5px;
       }
     }
     .info {
@@ -115,7 +112,6 @@ export const Recent_Episodes = styled.main`
         right: 0px;
         padding: 5px 8px;
         background-color: green;
-        border-radius: 10px;
         font-weight: 600;
         margin: 5px 5px 0px 0px;
       }
@@ -132,6 +128,11 @@ export const Recent_Episodes = styled.main`
         transition: ease 0.3s;
         font-weight: 600;
         z-index: 50;
+        .title {
+          @media (max-width: 390px) {
+            font-size: 8px;
+          }
+        }
       }
       .blur_bg {
         position: absolute;

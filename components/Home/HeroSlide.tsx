@@ -232,13 +232,13 @@ function HeroSlide({ data }: hero_data | any) {
                     />
                   </Image>
                   <Info className="px-1 sm:px-2 md:px-3 lg:px-5 xl:px-7 2xl:px-10">
-                    <h1 className="text-3xl lg:text-5xl xl:text-6xl 2xl:text-7xl mb-6 font-semibold">
+                    <h1 className="text-xl lg:text-xl 2xl:text-5xl mb-6 font-semibold">
                       {anime.title}
                     </h1>
-                    <h2 className="text-xl lg:text-2xl mb-6 font-semibold xl:text-4xl 2xl:text-5xl text-gray-400">
+                    <h2 className="text-base lg:text-lg mb-6 font-semibold  2xl:text-4xl text-gray-400">
                       {anime.title_japanese}
                     </h2>
-                    <ul className="flex items-center mb-6 flex-wrap text-gray-300 font-semibold text-base lg:text-lg xl:text-xl 2xl:text-2xl">
+                    <ul className="flex items-center mb-6 flex-wrap text-gray-300 font-semibold text-sm lg:text-base  2xl:text-xl">
                       <li>
                         <Time /> {anime.broadcast.string}
                       </li>
@@ -250,7 +250,7 @@ function HeroSlide({ data }: hero_data | any) {
                         {anime.type === "TV" ? "24 min" : anime.duration}
                       </li>
                     </ul>
-                    <p className=" sm:text-xs md:text-sm lg:text-base xl:text-xl mb-6 text-gray-300">
+                    <p className=" text-xs md:text-sm lg:text-base  mb-6 text-gray-300">
                       {anime.synopsis.slice(0, 450)}
                       {anime.synopsis.length > 450 && "..."}
                     </p>

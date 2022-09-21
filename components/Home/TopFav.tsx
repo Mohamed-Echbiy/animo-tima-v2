@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
+import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import { anime } from "../../interfaces";
@@ -9,10 +10,10 @@ import { anime } from "../../interfaces";
 function TopFav() {
   const fetchData = async () => {
     const res = await fetch(
-      `https://api.jikan.moe/v4/top/anime?filter=favorite`
+      `https://consumet-api.herokuapp.com/meta/anilist/popular`
     );
     const data = await res.json();
-    return data.data.slice(0, 5);
+    return data.results.slice(0, 5);
   };
   const { data, isLoading } = useQuery(["data"], fetchData);
   if (isLoading) {
@@ -21,13 +22,13 @@ function TopFav() {
   const result = data.map((anime: anime) => {
     return (
       <div className={`list`} key={nanoid()}>
-        <div className="list_image">
+        <div className="list_image relative">
           <Link href={`/detail/${anime.mal_id}`}>
             <a title="">
-              <img
-                src={anime.images.webp.image_url}
+              <Image
+                src={anime.image}
                 alt="cover image"
-                width="200"
+                width="55"
                 height="200"
               />
             </a>
@@ -35,13 +36,16 @@ function TopFav() {
         </div>
         <div className="anime_information ml-2">
           <div className="anime_name text-base py-4 font-semibold text-center">
-            <h3>
-              {anime.title.slice(0, 25)} {anime.title.length > 25 && "..."}
+            <h3 className="text-sm">
+              {anime.title.userPreferred.slice(0, 25)}
+              {anime.title.length > 25 && "..."}
             </h3>
           </div>
-          <div className="more_info flex justify-around items-center text-sm capitalize">
-            <p>{anime.score}</p>
-            <p> {anime.duration.slice(0, 2)} min </p>
+          <div className="more_info flex justify-around items-center text-xs  capitalize">
+            <p>
+              {anime.totalEpisodes}/<span className="font-semibold">Ep</span>
+            </p>
+            <p> {anime.duration} min </p>
             <p> {anime.type} </p>
           </div>
         </div>
@@ -53,7 +57,7 @@ function TopFav() {
     <Top_Fav className="top_fav">
       <h1 className="List_Header py-5 font-semibold">Favorite</h1>
       <>{result}</>
-      <div className="more_details py-5 font-semibold">
+      <div className=" more_details py-5 font-semibold">
         <Link href={`/popular`}>
           <a title="more_details">More Details</a>
         </Link>
@@ -74,15 +78,24 @@ export const Top_Fav = styled.main`
     display: flex;
     flex-wrap: wrap;
     background-color: #4a4b51;
+    height: 80px;
     .list_image {
-      width: 80px;
+      height: 100%;
+      span {
+        position: initial !important;
+      }
       img {
         width: 100%;
+        height: 100%;
+        object-fit: fill;
       }
     }
     .anime_information {
       width: calc(100% - 88px);
       height: 120px;
+      h3 {
+        font-weight: 500;
+      }
     }
   }
   .more_details,
@@ -90,19 +103,12 @@ export const Top_Fav = styled.main`
     width: 100%;
     text-align: center;
     background-color: #4a4b51;
-    font-size: 1.3rem;
     padding-left: 20px;
     letter-spacing: 1.5px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
   }
   .List_Header {
     color: gold;
-    font-size: 1.5rem;
     text-align: start;
-    border-radius: 0px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
   }
   & .list:nth-child(2),
   & .list:nth-child(4),

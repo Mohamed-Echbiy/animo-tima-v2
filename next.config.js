@@ -6,6 +6,10 @@ module.exports = {
     defaultLocale: "en",
   },
   images: {
-    domains: ["cdn.myanimelist.net", "img1.ak.crunchyroll.com"],
+    domains: [
+      "cdn.myanimelist.net",
+      "img1.ak.crunchyroll.com",
+      "s4.anilist.co",
+    ],
   },
 };

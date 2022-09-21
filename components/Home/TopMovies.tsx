@@ -13,7 +13,7 @@ function TopMovies() {
   const { data, isLoading, isError } = useQuery(["dataMovies"], fetchData, {
     staleTime: 3000 * 100,
   });
-  if (isLoading) {
+  if (isLoading || isError) {
     return <></>;
   }
   const result = data.map((anime: anime) => {
@@ -33,11 +33,11 @@ function TopMovies() {
         </div>
         <div className="anime_information ml-2">
           <div className="anime_name text-base py-4 font-semibold text-center">
-            <h3>
+            <h3 className="text-sm">
               {anime.title.slice(0, 25)} {anime.title.length > 25 && "..."}
             </h3>
           </div>
-          <div className="more_info flex justify-around items-center text-sm capitalize">
+          <div className="more_info flex justify-around items-center text-xs capitalize">
             <p>{anime.score}</p>
             <p> {anime.duration.slice(0, 2)}h </p>
             <p> {anime.type} </p>

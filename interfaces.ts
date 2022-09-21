@@ -265,7 +265,9 @@ export interface dataOb {
 }
 
 export interface fullData {
+  pagination: any;
   data: {
+    [x: string]: any;
     data: {
       mal_id: number;
       url: "string";
@@ -439,6 +441,9 @@ export interface EpisodeVideos {
 }
 
 export interface anime {
+  malId: number;
+  totalEpisodes: number;
+  image: string | any;
   mal_id: number;
   url: "string";
   images: {
@@ -465,7 +470,7 @@ export interface anime {
   };
   approved: boolean;
   titles: ["string"];
-  title: "string";
+  title: { userPreferred: string } | any;
   title_english: "string";
   title_japanese: "string";
   title_synonyms: ["string"];

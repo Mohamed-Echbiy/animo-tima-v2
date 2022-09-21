@@ -49,8 +49,8 @@ export default RecentPromos;
 
 const Recent_Promos = styled.main`
   h1 {
-    margin-bottom: 4rem;
-    margin-top: 6rem;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
     color: gold;
   }
 `;

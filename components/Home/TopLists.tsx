@@ -25,6 +25,6 @@ const TopList_Container = styled.div`
   align-items: center;
   width: 100%;
   margin: auto;
-  margin-top: 6rem;
-  margin-bottom: 6rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 `;

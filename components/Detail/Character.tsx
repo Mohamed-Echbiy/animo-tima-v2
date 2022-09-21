@@ -17,11 +17,11 @@ function Characters({ id }: Number | any) {
     const data = await res.json();
     return data;
   };
-  const { data, isLoading, isError } = useQuery(
+  const { data, isLoading, isError, refetch } = useQuery(
     ["charcters", id],
     fetchChracter,
     {
-      refetchInterval: (isError) => (isError ? 3000 : 0),
+      staleTime: 10000,
     }
   );
 
@@ -33,7 +33,9 @@ function Characters({ id }: Number | any) {
     );
   }
   if (isError) {
-    return <></>;
+    setTimeout(() => {
+      refetch();
+    }, 1000);
   }
   const { data: results } = data;
   return (

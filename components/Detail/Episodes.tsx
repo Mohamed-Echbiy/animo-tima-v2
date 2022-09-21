@@ -42,8 +42,7 @@ function Episodes({ name }: [string, number] | any) {
     FetchEpisodes,
     {
       keepPreviousData: true,
-      refetchInterval: (isError) => (isError ? 1000 : 0),
-      staleTime: 60000 * 60 * 24,
+      refetchInterval: (data, isError) => (isError ? 2000 : false),
     }
   );
   if (isLoading) {
@@ -59,6 +58,7 @@ function Episodes({ name }: [string, number] | any) {
   // DESTRUCTION
   const { data: Allresults } = data;
   const { data: results, pagination } = Allresults;
+  console.log(results);
   return (
     <Episodes_Container className="mt-10 px-4 md:px-2 lg:px-3 xl:px-5 2xl:px-10">
       {pagination && (

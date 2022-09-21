@@ -4,10 +4,10 @@ import Header from "../components/Header";
 import HeroSlide from "../components/Home/HeroSlide";
 import RecentEpisodes from "../components/Home/RecentEpisodes";
 import RecentPromos from "../components/Home/RecentPromos";
+import Seasons from "../components/Home/Seasons";
 import TopLists from "../components/Home/TopLists";
 
 const Home: NextPage = (hero_data: any) => {
-  // console.log(hero_top_data);
   return (
     <div className="page">
       <Head>
@@ -25,6 +25,7 @@ const Home: NextPage = (hero_data: any) => {
           <TopLists />
           <RecentEpisodes />
           <RecentPromos />
+          <Seasons />
         </div>
       </main>
     </div>

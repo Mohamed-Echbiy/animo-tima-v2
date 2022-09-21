@@ -69,7 +69,7 @@ function Header() {
             </Link>
           </div>
         </SearchBar>
-        <Ul_Links className="Links hidden 2xl:block">
+        <Ul_Links className="Links hidden xl:block lg:text-sm 2xl:text-base">
           <Link href={`/top_movies`}>
             <a
               title="go to movies"
@@ -122,7 +122,7 @@ const Div = styled.nav`
   position: block;
   top: 0px;
   left: 0px;
-  padding: 30px 0px;
+  padding: 20px 0px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -173,7 +173,6 @@ const Div = styled.nav`
     padding: 1.4rem 10px;
     font-weight: 700;
     border-bottom: 1px solid rgb(205, 203, 203);
-    font-size: 1rem;
   }
   .items a:hover {
     color: rgb(222, 221, 221);
@@ -217,7 +216,6 @@ const SearchBar = styled.div`
 const Ul_Links = styled.div`
   a {
     padding: 5px 10px;
-    font-size: 1rem;
     :hover {
       color: #c8c7c7;
     }

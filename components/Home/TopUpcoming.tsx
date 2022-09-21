@@ -34,11 +34,11 @@ function TopUpcoming() {
         </div>
         <div className="anime_information ml-2">
           <div className="anime_name text-base py-4 font-semibold text-center">
-            <h3>
+            <h3 className="text-sm">
               {anime.title.slice(0, 25)} {anime.title.length > 25 && "..."}
             </h3>
           </div>
-          <div className="more_info flex justify-around items-center text-sm capitalize">
+          <div className="more_info flex justify-around items-center text-xs capitalize">
             <p>{anime.season ? anime.season : "unkown"}</p>
             <p> {anime.year ? anime.year : "unkown"} </p>
             <p> {anime.type} </p>
