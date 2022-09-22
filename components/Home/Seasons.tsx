@@ -100,7 +100,7 @@ function Seasons() {
               </Link>
             </div>
             <div className="info">
-              <div className="title_container hidden md:block">
+              <div className="title_container hidden md:flex">
                 <h3 className="title text-center text-xs sm:text-xs md:text-sm lg:text-base  w-full px-1">
                   {anime.title.userPreferred}
                 </h3>
@@ -169,7 +169,6 @@ export const Container = styled.main`
       width: 100%;
       bottom: -95px;
       background-color: #2a2c31;
-      display: flex;
       align-items: center;
       color: gold;
       text-transform: capitalize;
