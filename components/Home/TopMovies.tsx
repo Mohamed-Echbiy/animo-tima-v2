@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import { anime } from "../../interfaces";
@@ -7,13 +8,13 @@ function TopMovies({ data }: anime | any) {
   const result = data.map((anime: anime) => {
     return (
       <div className={`list`} key={nanoid()}>
-        <div className="list_image">
+        <div className="list_image relative">
           <Link href={`/detail/${anime.mal_id}`}>
             <a title="">
-              <img
+              <Image
                 src={anime.images.webp.image_url}
                 alt="cover image"
-                width="200"
+                width="55"
                 height="200"
               />
             </a>

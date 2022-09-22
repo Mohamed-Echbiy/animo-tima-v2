@@ -68,6 +68,7 @@ export const Top_Fav = styled.main`
     background-color: #4a4b51;
     height: 80px;
     .list_image {
+      width: 15%;
       height: 100%;
       span {
         position: initial !important;
