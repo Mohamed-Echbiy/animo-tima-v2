@@ -1,22 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
 import Link from "next/link";
 import styled from "styled-components";
 import { anime } from "../../interfaces";
 import { Top_Fav } from "./TopFav";
 
-function TopUpcoming() {
-  const fetchData = async () => {
-    const res = await fetch(
-      `https://api.jikan.moe/v4/top/anime?filter=upcoming`
-    );
-    const data = await res.json();
-    return data.data.slice(0, 5);
-  };
-  const { data, isLoading, isError } = useQuery(["dataUpcoming"], fetchData);
-  if (isLoading) {
-    return <></>;
-  }
+function TopUpcoming({ data }: anime | any) {
   const result = data.map((anime: anime) => {
     return (
       <div className={`list`} key={nanoid()}>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import SideBar from "./SideBar";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 function Header() {
   const [inputSearch, setInputSearch] = useState("unkown");
@@ -43,7 +44,7 @@ function Header() {
         <div className="logo flex items-center">
           <Link href="/">
             <a title="logo Image">
-              <img
+              <Image
                 src="/logo-removebg-preview.png"
                 alt="logo Image"
                 width={70}
@@ -189,6 +190,10 @@ const Div = styled.nav`
   }
   .logo_title {
     font-size: 1.2rem;
+    position: relative;
+    span {
+      position: initial !important;
+    }
   }
 `;
 const SearchBar = styled.div`

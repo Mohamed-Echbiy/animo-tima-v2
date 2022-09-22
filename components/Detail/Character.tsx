@@ -46,6 +46,8 @@ function Characters({ id }: Number | any) {
         navigation
         spaceBetween={10}
         slidesPerView={0}
+        lazy={true}
+        preloadImages={true}
         grabCursor={true}
         breakpoints={{
           300: {

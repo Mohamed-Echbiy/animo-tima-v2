@@ -1,21 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
 import Link from "next/link";
 import styled from "styled-components";
 import { anime } from "../../interfaces";
 import { Top_Fav } from "./TopFav";
-function TopMovies() {
-  const fetchData = async () => {
-    const res = await fetch(`https://api.jikan.moe/v4/top/anime?type=movie`);
-    const data = await res.json();
-    return data.data.slice(0, 5);
-  };
-  const { data, isLoading, isError } = useQuery(["dataMovies"], fetchData, {
-    staleTime: 3000 * 100,
-  });
-  if (isLoading || isError) {
-    return <></>;
-  }
+function TopMovies({ data }: anime | any) {
   const result = data.map((anime: anime) => {
     return (
       <div className={`list`} key={nanoid()}>

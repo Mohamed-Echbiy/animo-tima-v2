@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
+import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import { anime } from "../../interfaces";
@@ -7,28 +7,17 @@ import { Top_Fav } from "./TopFav";
 
 // this a component for top favourite
 
-function TopComplete() {
-  const fetchData = async () => {
-    const res = await fetch(
-      `https://api.jikan.moe/v4/anime?status=complete&order_by=scored_by&sort=desc`
-    );
-    const data = await res.json();
-    return data.data.slice(0, 5);
-  };
-  const { data, isLoading, isError } = useQuery(["Complete_data"], fetchData);
-  if (isLoading) {
-    return <></>;
-  }
-  const result = data.map((anime: anime) => {
+function TopComplete({ data }: anime | any) {
+  const result = data.slice(0, 5).map((anime: anime) => {
     return (
       <div className={`list`} key={nanoid()}>
-        <div className="list_image">
-          <Link href={`/detail/${anime.mal_id}`}>
+        <div className="list_image relative">
+          <Link href={`/detail/${anime.malId}`}>
             <a title="">
-              <img
-                src={anime.images.webp.image_url}
+              <Image
+                src={anime.image}
                 alt="cover image"
-                width="200"
+                width="55"
                 height="200"
               />
             </a>
@@ -37,12 +26,15 @@ function TopComplete() {
         <div className="anime_information ml-2">
           <div className="anime_name text-base py-4 font-semibold text-center">
             <h3 className="text-sm">
-              {anime.title.slice(0, 25)} {anime.title.length > 25 && "..."}
+              {anime.title.userPreferred.slice(0, 25)}
+              {anime.title.length > 25 && "..."}
             </h3>
           </div>
-          <div className="more_info flex justify-around items-center text-xs capitalize">
-            <p>{anime.score}</p>
-            <p> {anime.duration.slice(0, 2)} min </p>
+          <div className="more_info flex justify-around items-center text-xs  capitalize">
+            <p>
+              {anime.totalEpisodes}/<span className="font-semibold">Ep</span>
+            </p>
+            <p> {anime.duration} min </p>
             <p> {anime.type} </p>
           </div>
         </div>

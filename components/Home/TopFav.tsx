@@ -7,23 +7,12 @@ import { anime } from "../../interfaces";
 
 // this a component for top favourite
 
-function TopFav() {
-  const fetchData = async () => {
-    const res = await fetch(
-      `https://consumet-api.herokuapp.com/meta/anilist/popular`
-    );
-    const data = await res.json();
-    return data.results.slice(0, 5);
-  };
-  const { data, isLoading } = useQuery(["data"], fetchData);
-  if (isLoading) {
-    return <></>;
-  }
-  const result = data.map((anime: anime) => {
+function TopFav({ data }: anime | any) {
+  const result = data.slice(0, 5).map((anime: anime) => {
     return (
       <div className={`list`} key={nanoid()}>
         <div className="list_image relative">
-          <Link href={`/detail/${anime.mal_id}`}>
+          <Link href={`/detail/${anime.malId}`}>
             <a title="">
               <Image
                 src={anime.image}
@@ -74,6 +63,7 @@ export const Top_Fav = styled.main`
   min-width: 320px;
   margin-right: 0.5%;
   flex-grow: 1;
+  max-width: 520px;
   .list {
     display: flex;
     flex-wrap: wrap;

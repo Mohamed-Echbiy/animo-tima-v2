@@ -8,6 +8,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Clock, Play, Time } from "../../Icons/Icons";
 import Link from "next/link";
+import { anime } from "../../interfaces";
+import Image from "next/image";
 
 interface hero_data {
   data: {
@@ -139,7 +141,6 @@ interface hero_data {
 }
 
 function HeroSlide({ data }: hero_data | any) {
-  const { hero_data } = data;
   return (
     <HeroSlider>
       <Swiper
@@ -148,123 +149,58 @@ function HeroSlide({ data }: hero_data | any) {
         spaceBetween={0}
         slidesPerView={1}
         grabCursor={true}
+        preloadImages={false}
+        lazy={true}
         className="Swiper-Container"
         autoplay={{
           delay: 3000,
         }}
       >
-        {hero_data.data.slice(0, 10).map(
-          (anime: {
-            images: { webp: { large_image_url: string | undefined } };
-            title:
-              | string
-              | number
-              | boolean
-              | React.ReactElement<
-                  any,
-                  string | React.JSXElementConstructor<any>
-                >
-              | React.ReactFragment
-              | React.ReactPortal
-              | null
-              | undefined;
-            title_japanese:
-              | string
-              | number
-              | boolean
-              | React.ReactElement<
-                  any,
-                  string | React.JSXElementConstructor<any>
-                >
-              | React.ReactFragment
-              | React.ReactPortal
-              | null
-              | undefined;
-            broadcast: {
-              string:
-                | string
-                | number
-                | boolean
-                | React.ReactElement<
-                    any,
-                    string | React.JSXElementConstructor<any>
-                  >
-                | React.ReactFragment
-                | React.ReactPortal
-                | null
-                | undefined;
-            };
-            type:
-              | string
-              | number
-              | boolean
-              | React.ReactElement<
-                  any,
-                  string | React.JSXElementConstructor<any>
-                >
-              | React.ReactFragment
-              | null
-              | undefined;
-            duration:
-              | string
-              | number
-              | boolean
-              | React.ReactElement<
-                  any,
-                  string | React.JSXElementConstructor<any>
-                >
-              | React.ReactFragment
-              | React.ReactPortal
-              | null
-              | undefined;
-            synopsis: string | any[];
-            mal_id: any;
-          }) => {
-            return (
-              <SwiperSlide className="swiper__Slider" key={nanoid()}>
-                <Container>
-                  <Image>
-                    <img
-                      src={anime.images.webp.large_image_url}
-                      alt="hero image"
-                      width="200"
-                      height="200"
-                    />
-                  </Image>
-                  <Info className="px-1 sm:px-2 md:px-3 lg:px-5 xl:px-7 2xl:px-10">
-                    <h1 className="text-xl lg:text-xl 2xl:text-5xl mb-6 font-semibold">
-                      {anime.title}
-                    </h1>
-                    <h2 className="text-base lg:text-lg mb-6 font-semibold  2xl:text-4xl text-gray-400">
-                      {anime.title_japanese}
-                    </h2>
-                    <ul className="flex items-center mb-6 flex-wrap text-gray-300 font-semibold text-sm lg:text-base  2xl:text-xl">
-                      <li>
-                        <Time /> {anime.broadcast.string}
-                      </li>
-                      <li>
-                        <Play /> {anime.type}
-                      </li>
-                      <li>
-                        <Clock />
-                        {anime.type === "TV" ? "24 min" : anime.duration}
-                      </li>
-                    </ul>
-                    <p className=" text-xs md:text-sm lg:text-base  mb-6 text-gray-300">
-                      {anime.synopsis.slice(0, 450)}
-                      {anime.synopsis.length > 450 && "..."}
-                    </p>
-                    <button>
-                      <Link href={`/detail/${anime.mal_id}`}>
-                        <a title="go to detaile page">Details</a>
-                      </Link>
-                    </button>
-                  </Info>
-                </Container>
-              </SwiperSlide>
-            );
-          }
-        )}
+        {data.map((anime: anime) => {
+          return (
+            <SwiperSlide className="swiper__Slider" key={nanoid()}>
+              <Container>
+                <Image_Container className=" blur-md lg:blur-0">
+                  <Image
+                    src={anime.cover}
+                    alt="hero image"
+                    layout="fill"
+                    loading="lazy"
+                  />
+                </Image_Container>
+                <Info className="px-1 sm:px-2 md:px-3 lg:px-5 xl:px-7 2xl:px-10">
+                  <h1 className="text-lg lg:text-xl 2xl:text-3xl mb-6 font-semibold">
+                    {anime.title.userPreferred}
+                  </h1>
+                  <h2 className="text-base lg:text-lg mb-6 font-semibold  2xl:text-2xl text-gray-400">
+                    {anime.title.native}
+                  </h2>
+                  <ul className="flex items-center mb-6 flex-wrap text-gray-300 font-semibold text-sm lg:text-base  2xl:text-lg">
+                    <li>
+                      <Time /> {anime.totalEpisodes}/Ep
+                    </li>
+                    <li>
+                      <Play /> {anime.type}
+                    </li>
+                    <li>
+                      <Clock />
+                      {anime.duration} min
+                    </li>
+                  </ul>
+                  <p className=" text-xs md:text-sm mb-6 text-gray-300">
+                    {anime.description.slice(0, 450)}
+                    {anime.description.length > 450 && "..."}
+                  </p>
+                  <button>
+                    <Link href={`/detail/${anime.malId}`}>
+                      <a title="go to detaile page">Details</a>
+                    </Link>
+                  </button>
+                </Info>
+              </Container>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </HeroSlider>
   );
@@ -272,7 +208,7 @@ function HeroSlide({ data }: hero_data | any) {
 
 export default HeroSlide;
 
-// styling
+// styling;
 
 const HeroSlider = styled.div`
   height: calc(100vh - 130px);
@@ -284,29 +220,42 @@ const HeroSlider = styled.div`
     > .swiper-button-prev {
       right: 30px;
       left: auto;
-      top: 85% !important;
+      top: 80% !important;
+      height: fit-content;
       ::after {
         color: white;
-        font-size: 20px;
         font-weight: bold;
-        padding: 10px 15px;
+        padding: 10px;
         background-color: black;
         border-radius: 5px;
         bottom: 0px;
+        @media (min-width: 120px) {
+          font-size: 10px;
+        }
+        @media (min-width: 768px) {
+          font-size: 12px;
+        }
+        @media (min-width: 1024px) {
+          font-size: 16px;
+        }
+        @media (min-width: 1280px) {
+          font-size: 18px;
+        }
       }
     }
     .swiper-button-prev {
-      transform: translateY(100%);
+      transform: translateY(50%);
+      margin-top: 5px;
     }
   }
 `;
 const Container = styled.div`
   position: relative;
-  height: calc(100vh - 130px);
+  height: calc(100vh - 117px);
   display: flex;
   align-items: center;
 `;
-const Image = styled.div`
+const Image_Container = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
@@ -317,7 +266,10 @@ const Image = styled.div`
     width: 100%;
     height: 100%;
     object-fit: fill;
-    filter: blur(10px) brightness(20%);
+    filter: brightness(15%) saturate(120%);
+    @media (max-width: 820px) {
+      filter: brightness(15%) saturate(120%), blur(10px);
+    }
   }
 `;
 const Info = styled.div`
@@ -337,10 +289,10 @@ const Info = styled.div`
     }
   }
   button {
-    padding: 10px 20px;
+    padding: 5px 10px;
     background-color: black;
-    border-radius: 10px;
-    font-size: 1.3rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
     text-align: center;
   }
 `;

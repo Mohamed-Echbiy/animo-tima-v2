@@ -441,6 +441,8 @@ export interface EpisodeVideos {
 }
 
 export interface anime {
+  cover: string;
+  description: string;
   malId: number;
   totalEpisodes: number;
   image: string | any;

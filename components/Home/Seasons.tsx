@@ -31,53 +31,56 @@ function Seasons() {
   //
   return (
     <div className="seasons_container my-12">
-      <div className="seasons__buttons flex justify-center items-cente mb-8 w-full">
+      <h1 className="title text-lg md:text-3xl text-yellow-500 mb-8">
+        Seasons :
+      </h1>
+      <div className="seasons__buttons flex justify-center items-cente mb-8 w-full flex-wrap">
         <div className="season__button w-1/4 mx-auto text-center">
           <button
-            className={`text-xs sm:text-sm md:text-base block px-4 py-2 w-20 md:w-24 mx-auto border-2 border-solid ${
+            className={`text-xs sm:text-sm md:text-base block px-2 py-2 md:w-32 mx-auto border-2 border-solid ${
               season === "SUMMER"
                 ? "text-yellow-500 border-white"
                 : "border-lime-700 text-gray-400"
             } rounded hover:scale-110 ease-in-out`}
             onClick={() => setSeason("SUMMER")}
           >
-            Summer
+            Summer ☀️
           </button>
         </div>
         <div className="season__button w-1/4 mx-auto text-center">
           <button
-            className={`text-xs sm:text-sm md:text-base block px-4 py-2 w-20 md:w-24 mx-auto border-2 border-solid ${
+            className={`text-xs sm:text-sm md:text-base block px-2 py-2 md:w-32 mx-auto border-2 border-solid ${
               season === "WINTER"
                 ? "text-yellow-500 border-white"
                 : "border-lime-700 text-gray-400"
             } rounded hover:scale-110 ease-in-out`}
             onClick={() => setSeason("WINTER")}
           >
-            Winter
+            Winter ❄️
           </button>
         </div>
         <div className="season__button w-1/4 mx-auto text-center">
           <button
-            className={`text-xs sm:text-sm md:text-base block px-4 py-2 w-20 md:w-24 mx-auto border-2 border-solid ${
+            className={`text-xs sm:text-sm md:text-base block px-2 py-2 md:w-32 mx-auto border-2 border-solid ${
               season === "SPRING"
                 ? "text-yellow-500 border-white"
                 : "border-lime-700 text-gray-400"
             } rounded hover:scale-110 ease-in-out`}
             onClick={() => setSeason("SPRING")}
           >
-            Spring
+            Spring 🌱
           </button>
         </div>
         <div className="season__button w-1/4 mx-auto text-center">
           <button
-            className={`text-xs sm:text-sm md:text-base block px-4 py-2 w-20 md:w-24 mx-auto border-2 border-solid ${
+            className={`text-xs sm:text-sm md:text-base block px-2 py-2 md:w-32 mx-auto border-2 border-solid ${
               season === "FALL"
                 ? "text-yellow-500 border-white"
                 : "border-lime-700 text-gray-400"
             } rounded hover:scale-110 ease-in-out`}
             onClick={() => setSeason("FALL")}
           >
-            Fall
+            Fall 🍂
           </button>
         </div>
       </div>
@@ -115,6 +118,16 @@ function Seasons() {
             </div>
           </Container>
         ))}
+      </div>
+      <div className="viewmore_container w-full text-right">
+        <Link href={`/season/${season}`}>
+          <a
+            title={`watch top ${season} season animes`}
+            className="text-xs sm:text-sm md:text-base text-gray-400 text-left md:pr-5"
+          >
+            view more {`>>`}
+          </a>
+        </Link>
       </div>
     </div>
   );
