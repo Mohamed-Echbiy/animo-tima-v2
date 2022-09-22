@@ -38,7 +38,7 @@ function RecentEpisodes() {
             {anime.entry.title}
           </h3>
         </div>
-        <div className="blur_bg"></div>
+        <div className="blur_bg hidden md:block"></div>
         <p className="episode text-xs sm:text-sm md:text-base">
           Ep: {anime.episodes[0].mal_id}
         </p>
