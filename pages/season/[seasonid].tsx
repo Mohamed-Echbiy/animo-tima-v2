@@ -70,19 +70,7 @@ export default seasonId;
 // styling
 const ContainerSeason = styled(Container)``;
 
-export const getStaticPaths = async () => {
-  return {
-    paths: [
-      { params: { seasonid: "WINTER" } },
-      { params: { seasonid: "SUMMER" } },
-      { params: { seasonid: "FALL" } },
-      { params: { seasonid: "SPRING" } },
-    ],
-    fallback: false,
-  };
-};
-
-export const getStaticProps = async (context: { params: any }) => {
+export const getServerSideProps = async (context: { params: any }) => {
   const { params } = context;
   const response1 = await fetch(
     `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?season=${params.seasonid}&perPage=100&page=1`
