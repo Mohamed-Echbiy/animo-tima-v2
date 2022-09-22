@@ -33,8 +33,8 @@ function RecentEpisodes() {
         </Link>
       </div>
       <div className="info">
-        <div className="title_container">
-          <h3 className="title text-center text-xs sm:text-xs md:text-sm lg:text-base w-full px-1">
+        <div className="title_container hidden md:block">
+          <h3 className="title text-center text-xs sm:text-xs md:text-sm lg:text-base w-full px-1 ">
             {anime.entry.title}
           </h3>
         </div>

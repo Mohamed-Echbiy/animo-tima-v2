@@ -100,12 +100,12 @@ function Seasons() {
               </Link>
             </div>
             <div className="info">
-              <div className="title_container">
-                <h3 className="title text-center text-xs sm:text-xs md:text-sm lg:text-base w-full px-1">
+              <div className="title_container hidden md:block">
+                <h3 className="title text-center text-xs sm:text-xs md:text-sm lg:text-base  w-full px-1">
                   {anime.title.userPreferred}
                 </h3>
               </div>
-              <div className="blur_bg"></div>
+              <div className="blur_bg hidden md:block"></div>
             </div>
             <div className="play_layer">
               <div className="play_icon w-1/4">
