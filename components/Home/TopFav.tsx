@@ -62,7 +62,6 @@ export const Top_Fav = styled.main`
   margin-bottom: 1.3rem;
   min-width: 320px;
   margin-right: 0.5%;
-  max-width: 25%;
   .list {
     display: flex;
     flex-wrap: wrap;
