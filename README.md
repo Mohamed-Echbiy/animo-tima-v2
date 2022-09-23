@@ -1,36 +1,4 @@
-    * , a {
-        color: #000;
-        background-color: #fbfbfb;
-    }
 
-     p {
-        max-width: 520px;
-        margin-bottom: 20px;
-    }
-    .heading {
-        color: #d4af37;
-    }
-    .link{
-        color: #d4af37;
-        font-size: 1.2rem;
-    }
-    .flex_container{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .icons{
-        display: flex;
-        align-items: center;
-        padding: 10px;
-        width: fit-content;
-        color: #000;
-    }
-    .icons img{
-        margin-right: 10px;
-    }
-
-</style>
 <div align="center" class=container >
 	<img src="https://animo-time-v2.vercel.app/_next/image?url=%2Flogo-removebg-preview.png&w=96&q=75"/>
 <!-- ------------- -->
