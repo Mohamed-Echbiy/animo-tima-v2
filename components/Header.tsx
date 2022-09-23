@@ -120,7 +120,7 @@ export default Header;
 //-------------------------------------------
 
 const Div = styled.nav`
-  position: block;
+  position: sticky;
   top: 0px;
   left: 0px;
   padding: 20px 0px;

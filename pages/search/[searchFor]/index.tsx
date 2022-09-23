@@ -65,8 +65,8 @@ function searchFor({ searchResult }: searchResult) {
       </Head>
       <Header />
 
-      <main className=" px-2 md:px-5 Container ">
-        <div className="navigate flex flex-row-reverse justify-between my-10">
+      <main className="Container ">
+        <div className="navigate px-4 md:px-6 flex flex-row-reverse justify-between my-10">
           {client.pagination.has_next_page ? (
             <button
               onClick={pagePlus}

@@ -32,7 +32,7 @@ function SearchCard({ data }: dataOb) {
             </a>
           </Link>
         </div>
-        <div className="score_type">
+        <div className="score_type hidden md:block">
           <h1 className="title" title={data.title}>
             {title}
             {data.title.length > 20 && "..."}
@@ -54,7 +54,7 @@ export default SearchCard;
 export const Div = styled.div`
   display: block;
   width: 16%;
-  margin-right: 0.5%;
+  margin-right: 0.6%;
   margin-bottom: 20px;
   position: relative;
   border-radius: 10px;
@@ -64,7 +64,6 @@ export const Div = styled.div`
     img {
       height: 100%;
       width: 100%;
-      border-radius: 10px;
       aspect-ratio: 0.7;
     }
   }
