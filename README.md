@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> e5fa74c (update readme)
 <div align="center" class=container >
 	<img src="https://animo-time-v2.vercel.app/_next/image?url=%2Flogo-removebg-preview.png&w=96&q=75"/>
 <!-- ------------- -->
