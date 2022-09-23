@@ -37,7 +37,7 @@ function Episodes({ name }: [string, number] | any) {
     const data = await res.json();
     return { data };
   };
-  const { data, isLoading, isError } = useQuery(
+  const { data, isLoading, isError, failureCount } = useQuery(
     ["Episodes", Page, name],
     FetchEpisodes,
     {
@@ -55,6 +55,7 @@ function Episodes({ name }: [string, number] | any) {
       </>
     );
   }
+  console.log(data, failureCount);
   // DESTRUCTION
   const { data: Allresults } = data;
   const { data: results, pagination } = Allresults;
@@ -82,7 +83,7 @@ function Episodes({ name }: [string, number] | any) {
               </>
             )}
           </Buttons>
-          {results.length < 1 ? (
+          {results.length < 1 || failureCount > 8 ? (
             <div className="w-full flex justify-center items-center mb-10">
               <button className="px-4 py-2 border-2 rounded border-lime-600 border-solid hover:scale-110 ease-in ">
                 <Link href={`/watch/${id}_${Name}-episode-1`}>
