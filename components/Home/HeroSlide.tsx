@@ -268,7 +268,7 @@ const Image_Container = styled.div`
     object-fit: fill;
     filter: brightness(15%) saturate(120%);
     @media (max-width: 820px) {
-      filter: brightness(15%) saturate(120%), blur(10px);
+      filter: brightness(50%) saturate(120%), blur(10px);
     }
   }
 `;
