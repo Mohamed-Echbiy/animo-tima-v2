@@ -1,11 +1,14 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> e5fa74c (update readme)
 <div align="center" class=container >
 	<img src="https://animo-time-v2.vercel.app/_next/image?url=%2Flogo-removebg-preview.png&w=96&q=75"/>
 <!-- ------------- -->
 	<h3 align="center" class="heading"> AnimoTime v2 - The completed anime website </h3>
 <!-- ------------ -->
 	<p align="center">
-		The open-source anime streaming service made with NextJs and TailwindCSS and Styled Components. It lets you search, watch animes without any ads with a beautiful ui. 			and it hosted via vercel on the following url.
+		The open-source anime streaming service made with NextJs, TailwindCSS and Styled Components. also it is the version 2 of the AnimoTime Project <a href="https://github.com/Mohamed-Echbiy/AnimoTime">Here</a> It lets you search, watch animes without any ads with a beautiful ui. and it hosted via vercel on the following url.
 	</br>
 		<a href="https://animo-time-v2.vercel.app/" alt="link" class="link">AnimoTime - V2</a>
 		</br>
