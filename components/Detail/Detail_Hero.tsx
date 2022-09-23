@@ -13,78 +13,80 @@ function DetailHero({ data }: dataOb) {
   };
   const summary = data.synopsis.slice(0, 350);
   return (
-    <Div_A className="Detail_page">
-      <div className="hero_container">
-        <Header />
-        <div className="background__image">
-          <img
-            src={data.images.webp.large_image_url}
-            alt="background image"
-            width="300"
-            height="400"
-          />
-        </div>
-        <div className="infos px-7 mt-52 md:mt-0">
-          <div className="image_summary">
-            <div className="cover_image mb-5">
-              <img
-                src={data.images.webp.image_url}
-                alt={`${data.title} cover image`}
-                width="200"
-                height="285"
-                className="mb-2"
-              />
+    <>
+      <Header />
+      <Div_A className="Detail_page">
+        <div className="hero_container">
+          <div className="background__image">
+            <img
+              src={data.images.webp.large_image_url}
+              alt="background image"
+              width="300"
+              height="400"
+            />
+          </div>
+          <div className="infos px-7 mt-20 md:mt-0">
+            <div className="image_summary">
+              <div className="cover_image mb-5">
+                <img
+                  src={data.images.webp.image_url}
+                  alt={`${data.title} cover image`}
+                  width="200"
+                  height="285"
+                  className="mb-2"
+                />
 
-              <button className="block mx-auto p-2 rounded-md w-36 border-2 hover:border-gray-900  ">
-                <a
-                  href={data.trailer.url}
-                  target="_blank"
-                  title="go to youtube"
-                >
-                  Trailer
-                </a>
-              </button>
-            </div>
-            <div className="title_summary ml-10 flex flex-col md:flex-row md:items-center">
-              <div className="summary">
-                <h1 className="title text-2xl lg:text-3xl">{data.title}</h1>
-                <p className="synposis">
-                  {showMore ? data.synopsis : `${summary}...`}
-                  <span
-                    className="block text-green-700 font-semibold cursor-pointer"
-                    onClick={summaryVsibility}
+                <button className="block mx-auto p-2 rounded-md w-36 border-2 hover:border-gray-900  ">
+                  <a
+                    href={data.trailer.url}
+                    target="_blank"
+                    title="go to youtube"
                   >
-                    {showMore ? "less -" : "more +"}
-                  </span>
-                </p>
+                    Trailer
+                  </a>
+                </button>
               </div>
-              <div className="more_details md:ml-10">
-                <p className="title_japanese text-yellow-400">
-                  {data.title_japanese}
-                </p>
-                <p className="type">Type: {data.type}</p>
-                <p className="status"> Status: {data.status}</p>
-                <p className="duration">Duration: {data.duration}</p>
-                <p className="eposides">Episodes: {data.episodes}</p>
-                <p className="score">Score: {data.score}</p>
-                <p className="gener mb-2">
-                  <span className="block mb-2">Genre</span>
-                  {data.genres.map((e) => (
+              <div className="title_summary ml-10 flex flex-col md:flex-row md:items-center">
+                <div className="summary">
+                  <h1 className="title text-2xl lg:text-3xl">{data.title}</h1>
+                  <p className="synposis">
+                    {showMore ? data.synopsis : `${summary}...`}
                     <span
-                      key={nanoid()}
-                      className="p-1 mr-1 border border-solid rounded-lg"
+                      className="block text-green-700 font-semibold cursor-pointer"
+                      onClick={summaryVsibility}
                     >
-                      {e.name}
+                      {showMore ? "less -" : "more +"}
                     </span>
-                  ))}
-                </p>
-                <p>Popularity : {data.popularity}</p>
+                  </p>
+                </div>
+                <div className="more_details md:ml-10">
+                  <p className="title_japanese text-yellow-400">
+                    {data.title_japanese}
+                  </p>
+                  <p className="type">Type: {data.type}</p>
+                  <p className="status"> Status: {data.status}</p>
+                  <p className="duration">Duration: {data.duration}</p>
+                  <p className="eposides">Episodes: {data.episodes}</p>
+                  <p className="score">Score: {data.score}</p>
+                  <p className="gener mb-2">
+                    <span className="block mb-2">Genre</span>
+                    {data.genres.map((e) => (
+                      <span
+                        key={nanoid()}
+                        className="p-1 mr-1 border border-solid rounded-lg"
+                      >
+                        {e.name}
+                      </span>
+                    ))}
+                  </p>
+                  <p>Popularity : {data.popularity}</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </Div_A>
+      </Div_A>
+    </>
   );
 }
 
