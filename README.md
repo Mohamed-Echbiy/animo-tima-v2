@@ -1,9 +1,8 @@
-<style>
     * , a {
         color: #000;
         background-color: #fbfbfb;
     }
-    
+
      p {
         max-width: 520px;
         margin-bottom: 20px;
@@ -30,7 +29,6 @@
     .icons img{
         margin-right: 10px;
     }
-    
 
 </style>
 <div align="center" class=container >
