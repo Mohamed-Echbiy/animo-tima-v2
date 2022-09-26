@@ -574,6 +574,20 @@ export interface anime {
   ];
 }
 export interface recentEp {
+  id: "string";
+  malId: 0;
+  title: {
+    romaji: "string";
+    english: "string";
+    native: "string";
+    userPreferred: "string";
+  };
+  episodeId: "string";
+  episodeTitle: "string";
+  episodeNumber: 0;
+  image: "string";
+  rating: 0;
+
   entry: {
     mal_id: 0;
     url: "string";

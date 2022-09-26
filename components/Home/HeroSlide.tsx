@@ -1,15 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper";
+import { Navigation, Autoplay, Pagination } from "swiper";
 import { nanoid } from "nanoid";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { Clock, Play, Time } from "../../Icons/Icons";
 import Link from "next/link";
 import { anime } from "../../interfaces";
 import Image from "next/image";
+import { type } from "os";
 
 interface hero_data {
   data: {
@@ -144,38 +146,41 @@ function HeroSlide({ data }: hero_data | any) {
   return (
     <HeroSlider>
       <Swiper
-        modules={[Navigation, Autoplay]}
+        modules={[Navigation, Autoplay, Pagination]}
         navigation
         spaceBetween={0}
         slidesPerView={1}
-        grabCursor={true}
         preloadImages={false}
         lazy={true}
         className="Swiper-Container"
         autoplay={{
           delay: 3000,
         }}
+        pagination={{ clickable: true }}
       >
         {data.map((anime: anime) => {
           return (
-            <SwiperSlide className="swiper__Slider" key={nanoid()}>
+            <SwiperSlide
+              className="swiper__Slider SwiperConatiner_Child"
+              key={nanoid()}
+            >
               <Container>
-                <Image_Container className=" blur-md lg:blur-0">
+                <Image_Container className="lg:blur-0">
                   <Image
                     src={anime.cover}
                     alt="hero image"
                     layout="fill"
-                    loading="lazy"
+                    priority={true}
                   />
                 </Image_Container>
-                <Info className="px-1 sm:px-2 md:px-3 lg:px-5 xl:px-7 2xl:px-10">
-                  <h1 className="text-lg lg:text-xl 2xl:text-3xl mb-6 font-semibold">
+                <Info className="px-2 md:px-3 lg:px-5 xl:px-7 2xl:px-10">
+                  <h1 className="text-base lg:text-xl 2xl:text-3xl mb-2 lg:mb-6 font-semibold">
                     {anime.title.userPreferred}
                   </h1>
-                  <h2 className="text-base lg:text-lg mb-6 font-semibold  2xl:text-2xl text-gray-400">
+                  <h2 className="text-sm lg:text-lg mb-2 lg:mb-6 font-semibold  2xl:text-2xl text-gray-400">
                     {anime.title.native}
                   </h2>
-                  <ul className="flex items-center mb-6 flex-wrap text-gray-300 font-semibold text-sm lg:text-base  2xl:text-lg">
+                  <ul className="flex items-center mb-2 lg:mb-6 flex-wrap text-gray-300 font-semibold text-xs lg:text-base  2xl:text-lg">
                     <li>
                       <Time /> {anime.totalEpisodes}/Ep
                     </li>
@@ -187,7 +192,7 @@ function HeroSlide({ data }: hero_data | any) {
                       {anime.duration} min
                     </li>
                   </ul>
-                  <p className=" text-xs md:text-sm mb-6 text-gray-300">
+                  <p className=" text-xs md:text-sm mb-6 text-gray-300 hidden lg:block">
                     {anime.description.slice(0, 450)}
                     {anime.description.length > 450 && "..."}
                   </p>
@@ -211,7 +216,6 @@ export default HeroSlide;
 // styling;
 
 const HeroSlider = styled.div`
-  height: calc(100vh - 130px);
   > .Swiper-Container {
     .swiper-slide {
       transition: 0.5s ease;
@@ -242,19 +246,45 @@ const HeroSlider = styled.div`
           font-size: 18px;
         }
       }
+      @media (max-width: 820px) {
+        display: none;
+      }
     }
     .swiper-button-prev {
       transform: translateY(50%);
       margin-top: 5px;
     }
   }
+  .swiper-pagination-bullet {
+    display: none;
+    @media (max-width: 820px) {
+      display: inline-block;
+      background-color: #ffffffe6;
+    }
+  }
+  .swiper-pagination-bullet-active {
+    display: none;
+    @media (max-width: 820px) {
+      display: inline-block;
+      background-color: #04d804cf;
+    }
+  }
 `;
+//
 const Container = styled.div`
   position: relative;
   height: calc(100vh - 117px);
   display: flex;
   align-items: center;
+  @media (max-width: 820px) {
+    height: auto;
+    width: 100%;
+    aspect-ratio: 16/9;
+    margin-top: 10px;
+    padding: 0px 10px;
+  }
 `;
+//
 const Image_Container = styled.div`
   width: 100%;
   height: 100%;
@@ -262,13 +292,17 @@ const Image_Container = styled.div`
   left: 0px;
   top: 0px;
   z-index: -1;
+  @media (max-width: 820px) {
+    padding: 0px 10px;
+  }
   img {
     width: 100%;
     height: 100%;
     object-fit: fill;
-    filter: brightness(15%) saturate(120%);
+    filter: brightness(17%) saturate(120%);
     @media (max-width: 820px) {
-      filter: brightness(50%) saturate(120%), blur(10px);
+      padding: 0px 10px !important;
+      border-radius: 25px;
     }
   }
 `;

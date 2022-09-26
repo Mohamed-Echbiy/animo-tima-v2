@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,19 +10,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import Link from "next/link";
 
-function Trending() {
-  const fetchTrend = async () => {
-    const res = await fetch(
-      `https://consumet-api.herokuapp.com/meta/anilist/trending`
-    );
-    const data = await res.json();
-    return data.results;
-  };
-  const { data, isLoading, isError } = useQuery(["trend"], fetchTrend);
-  if (isLoading || isError) {
-    return <></>;
-  }
-  //   console.log(data);
+function Trending({ data }: { data: anime } | any) {
   const results = data.map((anime: anime, index: number) => (
     <SwiperSlide key={nanoid()}>
       <Image__Container className="image_container relative">
@@ -49,7 +36,7 @@ function Trending() {
       <Swiper
         modules={[Navigation]}
         navigation
-        spaceBetween={5}
+        spaceBetween={7}
         slidesPerView={3}
         lazy={true}
         preloadImages={true}

@@ -25,12 +25,12 @@ function TopFav({ data }: anime | any) {
         </div>
         <div className="anime_information ml-2">
           <div className="anime_name text-base py-4 font-semibold text-center">
-            <h3 className="text-sm">
+            <h3 className="text-xs">
               {anime.title.userPreferred.slice(0, 25)}
               {anime.title.length > 25 && "..."}
             </h3>
           </div>
-          <div className="more_info flex justify-around items-center text-xs  capitalize">
+          <div className="more_info flex justify-around items-center capitalize">
             <p>
               {anime.totalEpisodes}/<span className="font-semibold">Ep</span>
             </p>
@@ -84,6 +84,10 @@ export const Top_Fav = styled.main`
       height: 120px;
       h3 {
         font-weight: 500;
+        font-size: 12px;
+      }
+      p {
+        font-size: 10px;
       }
     }
   }

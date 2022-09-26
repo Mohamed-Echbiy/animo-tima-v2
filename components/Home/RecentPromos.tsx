@@ -1,24 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import Youtube, { YouTubeProps } from "react-youtube";
 import React from "react";
 import styled from "styled-components";
 import { nanoid } from "nanoid";
+import { recentEp } from "../../interfaces";
 
-function RecentPromos() {
-  const fetchData = async () => {
-    const res = await fetch(`https://api.jikan.moe/v4/watch/promos`);
-    const data = await res.json();
-    return data.data.slice(0, 3);
-  };
-  const { data, isLoading, isError } = useQuery(["recentpromos"], fetchData, {
-    refetchInterval: (data, isError) => (isError ? 3000 : 0),
-  });
-  if (isLoading) {
-    return <></>;
-  }
-  if (isError) {
-    return <></>;
-  }
+function RecentPromos({ data }: { data: recentEp } | any) {
   const opts: YouTubeProps["opts"] = {
     height: "100",
     width: "100",

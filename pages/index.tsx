@@ -13,8 +13,15 @@ import TopComplete from "../components/Home/Top_Complete";
 import Trending from "../components/Home/Trending";
 
 const Home: NextPage = ({ Alldata }: any) => {
-  const [hero_data, popular_data, completed_data, movie_data, upcoming_data] =
-    Alldata;
+  const [
+    hero_data,
+    popular_data,
+    completed_data,
+    movie_data,
+    upcoming_data,
+    recent_Episodes_data,
+    recent_promos_data,
+  ] = Alldata;
   return (
     <div className="page">
       <Head>
@@ -29,15 +36,15 @@ const Home: NextPage = ({ Alldata }: any) => {
       <main className="">
         <HeroSlide data={hero_data} />
         <div className="main_info  px-3 md:px-5  xl:px-7">
-          <Trending />
+          <Trending data={hero_data} />
           <TopList_Container>
             <TopFav data={popular_data} />
             <TopUpcoming data={upcoming_data} />
             <TopMovies data={movie_data} />
             <TopComplete data={completed_data} />
           </TopList_Container>
-          <RecentEpisodes />
-          <RecentPromos />
+          <RecentEpisodes data={recent_Episodes_data} />
+          <RecentPromos data={recent_promos_data} />
           <Seasons />
         </div>
       </main>
@@ -94,17 +101,29 @@ export const getStaticProps = async () => {
   const data5 = await upcoming_res.json();
   const upcoming_data = await data5.data;
   //
+  const recent_Episodes = await fetch(
+    `https://consumet-api.herokuapp.com/meta/anilist/recent-episodes?perPage=12`
+  );
+  const data6 = await recent_Episodes.json();
+  const recent_Episodes_data = await data6.results;
+  //
+  const recent_promos = await fetch(`https://api.jikan.moe/v4/watch/promos`);
+  const data7 = await recent_promos.json();
+  const recent_promos_data = await data7.data.slice(0, 3);
   const Alldata = [
     hero_data,
     popular_data,
     completed_data,
     movie_data,
     upcoming_data,
+    recent_Episodes_data,
+    recent_promos_data,
   ];
 
   return {
     props: {
       Alldata,
     },
+    revalidate: 3600,
   };
 };
