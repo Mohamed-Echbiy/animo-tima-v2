@@ -9,10 +9,10 @@ function TopMovies({ data }: anime | any) {
     return (
       <div className={`list`} key={nanoid()}>
         <div className="list_image relative">
-          <Link href={`/detail/${anime.mal_id}`}>
+          <Link href={`/detail/${anime.id}`}>
             <a title="">
               <Image
-                src={anime.images.webp.image_url}
+                src={anime.image}
                 alt="cover image"
                 width="55"
                 height="200"
@@ -23,12 +23,13 @@ function TopMovies({ data }: anime | any) {
         <div className="anime_information ml-2">
           <div className="anime_name text-base py-4 font-semibold text-center">
             <h3 className="text-sm">
-              {anime.title.slice(0, 25)} {anime.title.length > 25 && "..."}
+              {anime.title.english.slice(0, 25)}{" "}
+              {anime.title.english.length > 25 && "..."}
             </h3>
           </div>
           <div className="more_info flex justify-around items-center text-xs capitalize">
-            <p>{anime.score}</p>
-            <p> {anime.duration.slice(0, 2)}h </p>
+            <p>{anime.rating}</p>
+            <p> {anime.duration}h </p>
             <p> {anime.type} </p>
           </div>
         </div>

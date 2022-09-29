@@ -12,7 +12,7 @@ function TopComplete({ data }: anime | any) {
     return (
       <div className={`list`} key={nanoid()}>
         <div className="list_image relative">
-          <Link href={`/detail/${anime.malId}`}>
+          <Link href={`/detail/${anime.id}`}>
             <a title="">
               <Image
                 src={anime.image}

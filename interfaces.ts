@@ -263,6 +263,147 @@ export interface dataOb {
     ];
   };
 }
+export interface anilistInfo {
+  type: string;
+  synonyms: any;
+  id: "string";
+  title: {
+    romaji: "string";
+    english: "string";
+    native: "string";
+    userPreferred: "string";
+  };
+  malId: "string";
+  trailer: {
+    site: "string";
+    id: "string";
+    thumbnail: "string";
+  };
+  cover: "string";
+  image: "string";
+  description: "string";
+  genres: ["string"];
+  releaseDate: "string";
+  status: "Ongoing";
+  rating: number;
+  duration: number;
+  studios: ["string"];
+  subOrDub: "sub";
+  episodes: [
+    {
+      id: "string";
+      number: number;
+      title: "string";
+      image: "string";
+      description: "string";
+    }
+  ];
+  characters: [
+    {
+      id: number;
+      image: string;
+      name: {
+        first: string;
+        full: string | undefined;
+        last: string | undefined;
+        userPreferred: string;
+        native: string;
+      };
+      role: string;
+      voiceActors: [
+        {
+          id: number;
+          name: {
+            first: string;
+            full: string | undefined;
+            last: string | undefined;
+            userPreferred: string;
+            native: string;
+          };
+          image: string;
+        }
+      ];
+    }
+  ];
+
+  recommendations: [
+    {
+      cover: string;
+      episodes: number;
+      id: number;
+      image: string;
+      malId: number;
+      rating: number;
+      status: string;
+      type: string;
+      title: {
+        english: string;
+        native: string;
+        romaji: string;
+        userPreferred: string;
+      };
+    }
+  ];
+  relations: {
+    color: string;
+    cover: string;
+    episodes: number;
+    id: number;
+    image: string;
+    malId: number;
+    rating: number;
+    relationType: string;
+    status: string;
+    title: {
+      english: string;
+      native: string;
+      romaji: string;
+      userPreferred: string;
+    };
+  };
+  totalEpisodes: number;
+}
+export interface RecommendationAnilist {
+  cover: string;
+  episodes: number;
+  id: number;
+  image: string;
+  malId: number;
+  rating: number;
+  status: string;
+  type: string;
+  title: {
+    english: string;
+    native: string;
+    romaji: string;
+    userPreferred: string;
+  };
+}
+export interface charactersAnilist {
+  id: number;
+  image: string;
+  name: {
+    first: string;
+    full: string | undefined;
+    last: string | undefined;
+    userPreferred: string;
+    native: string;
+  };
+  role: string;
+  voiceActors: [
+    {
+      id: number;
+      name: {
+        first: string;
+        full: string | undefined;
+        last: string | undefined;
+        userPreferred: string;
+        native: string;
+      };
+      image: string;
+    }
+  ];
+}
 
 export interface fullData {
   pagination: any;
@@ -270,7 +411,7 @@ export interface fullData {
     [x: string]: any;
     data: {
       mal_id: number;
-      url: "string";
+      url: string;
       images: {
         jpg: {
           image_url: "string";
@@ -441,6 +582,8 @@ export interface EpisodeVideos {
 }
 
 export interface anime {
+  releaseDate: any;
+  id: any;
   cover: string;
   description: string;
   malId: number;
@@ -575,7 +718,7 @@ export interface anime {
 }
 export interface recentEp {
   id: "string";
-  malId: 0;
+  malId: number;
   title: {
     romaji: "string";
     english: "string";
@@ -584,12 +727,12 @@ export interface recentEp {
   };
   episodeId: "string";
   episodeTitle: "string";
-  episodeNumber: 0;
+  episodeNumber: number;
   image: "string";
-  rating: 0;
+  rating: number;
 
   entry: {
-    mal_id: 0;
+    mal_id: number;
     url: "string";
     images: {
       jpg: {

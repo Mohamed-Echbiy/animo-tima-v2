@@ -88,18 +88,18 @@ export const getStaticProps = async () => {
   const completed_data = await data2.results;
   //
   const movie_res = await fetch(
-    `https://api.jikan.moe/v4/top/anime?type=movie&limit=5`
+    `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?format=MOVIE&perPage=5`
   );
 
   const data4 = await movie_res.json();
-  const movie_data = await data4.data;
+  const movie_data = await data4.results;
   //
   const upcoming_res = await fetch(
-    `https://api.jikan.moe/v4/top/anime?filter=upcoming&limit=5`
+    `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?status=NOT_YET_RELEASED&perPage=5`
   );
 
   const data5 = await upcoming_res.json();
-  const upcoming_data = await data5.data;
+  const upcoming_data = await data5.results;
   //
   const recent_Episodes = await fetch(
     `https://consumet-api.herokuapp.com/meta/anilist/recent-episodes?perPage=12`

@@ -2,85 +2,9 @@ import { nanoid } from "nanoid";
 import Head from "next/head";
 import Header from "../../components/Header";
 import SearchCard from "../../components/serach/SearchCard";
+import { anilistInfo } from "../../interfaces";
 
-export interface Movie_card_types {
-  mal_id: number;
-  url: "string";
-  images: {
-    jpg: {
-      image_url: "string";
-      small_image_url: "string";
-      large_image_url: "string";
-    };
-    webp: {
-      image_url: "string";
-      small_image_url: "string";
-      large_image_url: "string";
-    };
-  };
-  trailer: {
-    youtube_id: "string";
-    url: "string";
-    embed_url: "string";
-  };
-  approved: boolean;
-  titles: ["string"];
-  title: "string";
-  title_english: "string";
-  title_japanese: "string";
-  title_synonyms: ["string"];
-  type: "TV";
-  source: "string";
-  episodes: number;
-  status: "Finished Airing";
-  airing: boolean;
-  aired: {
-    from: "string";
-    to: "string";
-    prop: {
-      from: { day: number; month: number; year: number };
-      to: { day: number; month: number; year: number };
-      string: "string";
-    };
-  };
-  duration: "string";
-  rating: "G - All Ages";
-  score: number;
-  scored_by: number;
-  rank: number;
-  popularity: number;
-  members: number;
-  favorites: number;
-  synopsis: "string";
-  background: "string";
-  season: "summer";
-  year: number;
-  broadcast: {
-    day: "string";
-    time: "string";
-    timezone: "string";
-    string: "string";
-  };
-  producers: [
-    { mal_id: number; type: "string"; name: "string"; url: "string" }
-  ];
-  licensors: [
-    { mal_id: number; type: "string"; name: "string"; url: "string" }
-  ];
-  studios: [{ mal_id: number; type: "string"; name: "string"; url: "string" }];
-  genres: [{ mal_id: number; type: "string"; name: "string"; url: "string" }];
-  explicit_genres: [
-    { mal_id: number; type: "string"; name: "string"; url: "string" }
-  ];
-  themes: [{ mal_id: number; type: "string"; name: "string"; url: "string" }];
-  demographics: [
-    { mal_id: number; type: "string"; name: "string"; url: "string" }
-  ];
-}
-export interface Data_type {
-  data: [Movie_card_types];
-}
-function index({ data }: Data_type) {
+function index({ data }: { data: [anilistInfo] }) {
   return (
     <>
       <div className="most__popular__container flex flex-wrap justify-center">
@@ -89,7 +13,7 @@ function index({ data }: Data_type) {
           <meta name="description" content="watch top movies anime free" />
         </Head>
         <Header />
-        {data.map((movieCard: Movie_card_types) => (
+        {data.map((movieCard: anilistInfo) => (
           <SearchCard key={nanoid()} data={movieCard} />
         ))}
       </div>
@@ -102,22 +26,27 @@ export default index;
 
 export const getServerSideProps = async () => {
   const resP1 = await fetch(
-    `https://api.jikan.moe/v4/top/anime?filter=bypopularity`
+    `https://consumet-api.herokuapp.com/meta/anilist/popular?perPage=50&page=1`
   );
   const dataP1 = await resP1.json();
-  const result1 = await dataP1.data;
+  const result1 = await dataP1.results;
   const resP2 = await fetch(
-    `https://api.jikan.moe/v4/top/anime?filter=bypopularity&page=2`
+    `https://consumet-api.herokuapp.com/meta/anilist/popular?perPage=50&page=2`
   );
   const dataP2 = await resP2.json();
-  const result2 = await dataP2.data;
+  const result2 = await dataP2.results;
   const resP3 = await fetch(
-    `https://api.jikan.moe/v4/top/anime?filter=bypopularity&page=3`
+    `https://consumet-api.herokuapp.com/meta/anilist/popular?perPage=50&page=3`
   );
   const dataP3 = await resP3.json();
-  const result3 = await dataP3.data;
+  const result3 = await dataP3.results;
+  const resP4 = await fetch(
+    `https://consumet-api.herokuapp.com/meta/anilist/popular?perPage=50&page=4`
+  );
+  const dataP4 = await resP4.json();
+  const result4 = await dataP4.results;
 
-  const data = [...result1, ...result2, ...result3];
+  const data = [...result1, ...result2, ...result3, ...result4];
 
   return {
     props: {

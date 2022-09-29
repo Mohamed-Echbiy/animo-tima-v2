@@ -88,7 +88,7 @@ function Seasons() {
         {data.map((anime: anime) => (
           <Container key={nanoid()} className="season_anime_container">
             <div className="anime__image">
-              <Link href={`detail/${anime.malId}`}>
+              <Link href={`detail/${anime.id}`}>
                 <a title="watch now">
                   <Image
                     src={anime.image}
@@ -109,7 +109,7 @@ function Seasons() {
             </div>
             <div className="play_layer">
               <div className="play_icon w-1/4">
-                <Link href={`/detail/${anime.malId}`}>
+                <Link href={`/detail/${anime.id}`}>
                   <a title="go to detail page">
                     <Play />
                   </a>

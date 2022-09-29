@@ -11,7 +11,7 @@ function NotFound() {
         </div>
         <div className="para__notfound">
           <h1>404</h1>
-          <p>the requested episode is not found </p>
+          <p>Sorry we Can't find this Page</p>
           <button>
             <Link href="/">
               <a title="go back to the home page">Go back home</a>

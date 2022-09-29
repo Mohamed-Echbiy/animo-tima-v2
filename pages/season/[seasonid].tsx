@@ -15,7 +15,7 @@ function seasonId({ data }: { data: anime } | { data: any }) {
   const result = data.map((anime: anime) => (
     <ContainerSeason key={nanoid()} className="season_animeContainer">
       <div className="anime__image">
-        <Link href={`detail/${anime.malId}`}>
+        <Link href={`detail/${anime.id}`}>
           <a title="watch now">
             <Image
               src={anime.image}
@@ -28,8 +28,8 @@ function seasonId({ data }: { data: anime } | { data: any }) {
         </Link>
       </div>
       <div className="info hidden md:flex">
-        <div className="title_container">
-          <h3 className="title text-center text-xs sm:text-xs md:text-sm lg:text-base w-full px-1">
+        <div className="title_container flex items-center">
+          <h3 className="title text-center text-xs lg:text-sm w-full px-1">
             {anime.title.userPreferred}
           </h3>
         </div>
@@ -37,7 +37,7 @@ function seasonId({ data }: { data: anime } | { data: any }) {
       </div>
       <div className="play_layer">
         <div className="play_icon w-1/4">
-          <Link href={`/detail/${anime.malId}`}>
+          <Link href={`/detail/${anime.id}`}>
             <a title="go to detail page">
               <Play />
             </a>

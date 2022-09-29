@@ -1,56 +1,54 @@
 import styled from "styled-components";
-import { dataOb } from "../../interfaces";
 import { useState } from "react";
 import Header from "../Header";
 import { nanoid } from "nanoid";
+import Image from "next/image";
+import { anilistInfo } from "../../interfaces";
 
 //-------------------------
 
-function DetailHero({ data }: dataOb) {
+function DetailHero({ data }: { data: anilistInfo }) {
+  // console.log(data);
   const [showMore, setshowMore] = useState(false);
   const summaryVsibility = () => {
     setshowMore((pre) => !pre);
   };
-  const summary = data.synopsis.slice(0, 350);
+  let summary;
+  if (data.hasOwnProperty("description")) {
+    summary = data.description.slice(0, 350);
+  }
   return (
     <>
       <Header />
       <Div_A className="Detail_page">
         <div className="hero_container">
-          <div className="background__image">
-            <img
-              src={data.images.webp.large_image_url}
+          <div className="background__image ">
+            <Image
+              src={data.cover}
               alt="background image"
-              width="300"
-              height="400"
+              layout="fill"
+              priority={true}
+              className="hidden lg:block"
             />
           </div>
-          <div className="infos px-7 mt-20 md:mt-0">
+          <div className="infos px-7 mt-10  md:mt-0">
             <div className="image_summary">
-              <div className="cover_image mb-5">
-                <img
-                  src={data.images.webp.image_url}
-                  alt={`${data.title} cover image`}
-                  width="200"
-                  height="285"
+              <div className="cover_image mb-3 mt-3 relative">
+                <Image
+                  src={data.image}
+                  alt={`cover image`}
+                  layout="fill"
+                  priority={true}
                   className="mb-2"
                 />
-
-                <button className="block mx-auto p-2 rounded-md w-36 border-2 hover:border-gray-900  ">
-                  <a
-                    href={data.trailer.url}
-                    target="_blank"
-                    title="go to youtube"
-                  >
-                    Trailer
-                  </a>
-                </button>
               </div>
               <div className="title_summary ml-10 flex flex-col md:flex-row md:items-center">
-                <div className="summary">
-                  <h1 className="title text-2xl lg:text-3xl">{data.title}</h1>
-                  <p className="synposis">
-                    {showMore ? data.synopsis : `${summary}...`}
+                <div className="summary mt-5">
+                  <h1 className="title text-2xl lg:text-3xl">
+                    {data.title.userPreferred}
+                  </h1>
+                  <p className="synposis h-40 overflow-y-scroll">
+                    {showMore ? data.description : `${summary}...`}
                     <span
                       className="block text-green-700 font-semibold cursor-pointer"
                       onClick={summaryVsibility}
@@ -59,27 +57,54 @@ function DetailHero({ data }: dataOb) {
                     </span>
                   </p>
                 </div>
-                <div className="more_details md:ml-10">
+                <div className="more_details md:ml-2">
                   <p className="title_japanese text-yellow-400">
-                    {data.title_japanese}
+                    {data.synonyms[0]}
                   </p>
-                  <p className="type">Type: {data.type}</p>
-                  <p className="status"> Status: {data.status}</p>
-                  <p className="duration">Duration: {data.duration}</p>
-                  <p className="eposides">Episodes: {data.episodes}</p>
-                  <p className="score">Score: {data.score}</p>
-                  <p className="gener mb-2">
-                    <span className="block mb-2">Genre</span>
-                    {data.genres.map((e) => (
+                  <p className="releaseDate">
+                    releaseDate:{" "}
+                    <span className="text-yellow-500">{data.releaseDate}</span>
+                  </p>
+                  <p className="type">
+                    Type: <span className="text-yellow-500">{data.type}</span>
+                  </p>
+                  <p className="status">
+                    Status:{" "}
+                    <span className="text-yellow-500">{data.status}</span>
+                  </p>
+                  <p className="duration">
+                    Duration:{" "}
+                    <span className="text-yellow-500">{data.duration}</span>
+                  </p>
+                  <p className="eposides">
+                    Episodes:{" "}
+                    <span className="text-yellow-500">
+                      {data.totalEpisodes}
+                    </span>
+                  </p>
+                  <p className="score">
+                    Score:{" "}
+                    <span className="text-yellow-500">{data.rating}</span>
+                  </p>
+                  <p className="gener mb-2 flex items-center flex-wrap">
+                    <span className="block mb-2 w-full">Genre:</span>
+                    {data.genres.map((e: string | number | boolean) => (
                       <span
                         key={nanoid()}
-                        className="p-1 mr-1 border border-solid rounded-lg"
+                        className="p-1 mr-1 mb-1 border border-solid rounded-lg"
                       >
-                        {e.name}
+                        <span className="">{e}</span>
                       </span>
                     ))}
                   </p>
-                  <p>Popularity : {data.popularity}</p>
+                  <p>
+                    Studios:{" "}
+                    {data.studios.map((e: string | number | boolean) => (
+                      <span key={nanoid()} className="text-yellow-500">
+                        {e}
+                      </span>
+                    ))}
+                  </p>
                 </div>
               </div>
             </div>
@@ -95,6 +120,9 @@ export default DetailHero;
 //-----------------------------------
 
 const Div_A = styled.div`
+  span {
+    position: initial !important;
+  }
   min-height: 100vh;
   position: relative;
   .background__image {
@@ -102,16 +130,20 @@ const Div_A = styled.div`
     position: absolute;
     top: 0px;
     width: 100%;
-    height: calc(100vh - 130px);
+    height: 100%;
     img {
       width: 100%;
       height: 100%;
-      filter: blur(50px) brightness(40%);
+      filter: blur(5px) brightness(43%) saturate(150%);
+      @media (max-width: 820px) {
+        filter: blur(25px) brightness(43%) saturate(150%);
+      }
     }
   }
   .cover_image {
     width: 20%;
     min-width: 200px;
+    aspect-ratio: 0.7;
     img {
       width: 100%;
       height: 100%;
@@ -135,16 +167,20 @@ const Div_A = styled.div`
         font-weight: 600;
         color: gold;
       }
+      .title_summary {
+        width: 75%;
+        flex-grow: 1;
+      }
       .summary {
-        max-width: 800px;
+        min-width: 300px;
       }
     }
     .more_details {
-      width: 300px;
+      min-width: 200px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 10px;
+      margin-top: 10px;
     }
   }
 `;

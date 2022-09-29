@@ -3,12 +3,10 @@ import { ArrowLeft, Burgger, Search } from "../Icons/Icons";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import Gener from "./Gener";
 
 function SideBar() {
   const { route } = useRouter();
   const [active, setActive] = useState(0);
-  const [randomId, setRandomId] = useState(1);
   useEffect(() => {
     switch (route) {
       case "/top_movies":
@@ -36,16 +34,15 @@ function SideBar() {
         setActive(0);
         break;
     }
-    const randomid = () => {
-      let a = Math.floor(Math.random() * 2000);
-      setRandomId(a);
-    };
-    randomid();
   }, []);
   const [inputSearch, setInputSearch] = useState("unkown");
   const [menu, setmenu] = useState(false);
   const Displaymenu = () => {
     setmenu((pre) => !pre);
+  };
+  const randomidFc = async () => {
+    let a = Math.floor(Math.random() * 5000);
+    window.open(`http://localhost:3000/detail/${a}`);
   };
   return (
     <>
@@ -82,11 +79,9 @@ function SideBar() {
           </div>
         </SearchBar>
         <div className="items flex flex-col">
-          <Link href={`/random/${randomId}`}>
-            <a title="watch a random anime" target="_blank">
-              Random
-            </a>
-          </Link>
+          <button className="ml-2 hover:text-gray-400" onClick={randomidFc}>
+            Random
+          </button>
           <Link href="/popular">
             <a
               title="go to most popular"
@@ -152,10 +147,9 @@ function SideBar() {
               Top Upcoming
             </a>
           </Link>
-          <h3 className="p-3 font-semibold text-xl">Genre:</h3>
         </div>
-        <Gener />
-        <Login className="login_btn">login</Login>
+
+        <Login className="login_btn mt-2">login</Login>
       </div>
     </>
   );

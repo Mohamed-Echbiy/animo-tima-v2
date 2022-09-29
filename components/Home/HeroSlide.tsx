@@ -11,7 +11,6 @@ import { Clock, Play, Time } from "../../Icons/Icons";
 import Link from "next/link";
 import { anime } from "../../interfaces";
 import Image from "next/image";
-import { type } from "os";
 
 interface hero_data {
   data: {
@@ -197,7 +196,7 @@ function HeroSlide({ data }: hero_data | any) {
                     {anime.description.length > 450 && "..."}
                   </p>
                   <button>
-                    <Link href={`/detail/${anime.malId}`}>
+                    <Link href={`/detail/${anime.id}`}>
                       <a title="go to detaile page">Details</a>
                     </Link>
                   </button>
@@ -273,9 +272,12 @@ const HeroSlider = styled.div`
 //
 const Container = styled.div`
   position: relative;
-  height: calc(100vh - 117px);
+  max-height: calc(100vh - 117px);
+  width: 100%;
   display: flex;
   align-items: center;
+  padding: 25px;
+  aspect-ratio: 16/9;
   @media (max-width: 820px) {
     height: auto;
     width: 100%;
@@ -292,6 +294,7 @@ const Image_Container = styled.div`
   left: 0px;
   top: 0px;
   z-index: -1;
+  padding: 25px;
   @media (max-width: 820px) {
     padding: 0px 10px;
   }
@@ -299,7 +302,9 @@ const Image_Container = styled.div`
     width: 100%;
     height: 100%;
     object-fit: fill;
-    filter: brightness(17%) saturate(120%);
+    filter: brightness(25%) saturate(200%);
+    padding: 25px !important;
+    border-radius: 40px;
     @media (max-width: 820px) {
       padding: 0px 10px !important;
       border-radius: 25px;
@@ -317,8 +322,8 @@ const Info = styled.div`
       align-items: center;
       svg {
         margin-right: 10px;
-        width: 20px;
-        height: 20px;
+        width: 15px;
+        height: 15px;
       }
     }
   }

@@ -10,7 +10,6 @@ function Header() {
   const [inputSearch, setInputSearch] = useState("unkown");
   const { route } = useRouter();
   const [active, setActive] = useState(0);
-  const [randomId, setRandomId] = useState(1);
   useEffect(() => {
     switch (route) {
       case "/top_movies":
@@ -30,12 +29,11 @@ function Header() {
         setActive(0);
         break;
     }
-    const randomid = () => {
-      let a = Math.floor(Math.random() * 2000);
-      setRandomId(a);
-    };
-    randomid();
   }, []);
+  const randomidFc = async () => {
+    let a = Math.floor(Math.random() * 5000);
+    window.open(`http://localhost:3000/detail/${a}`);
+  };
 
   return (
     <>
@@ -103,11 +101,9 @@ function Header() {
               TOP Upcoming
             </a>
           </Link>
-          <Link href={`/random/${randomId}`}>
-            <a title="get a random anime" target="_blank">
-              Random
-            </a>
-          </Link>
+          <button className="ml-2 hover:text-gray-400" onClick={randomidFc}>
+            Random
+          </button>
         </Ul_Links>
         <Login className="login_btn">login</Login>
       </Div>
@@ -170,10 +166,12 @@ const Div = styled.nav`
     opacity: 1;
   }
 
-  .items a {
+  .items a,
+  .items button {
     padding: 1.4rem 10px;
     font-weight: 700;
     border-bottom: 1px solid rgb(205, 203, 203);
+    text-align: center;
   }
   .items a:hover {
     color: rgb(222, 221, 221);

@@ -10,7 +10,7 @@ function RecentEpisodes({ data }: { data: recentEp } | any) {
   const results = data.map((anime: recentEp) => (
     <div key={nanoid()} className="episode_item">
       <div className="image_container">
-        <Link href={`/detail/${anime.malId}`}>
+        <Link href={`/detail/${anime.id}`}>
           <a title="go to detail page">
             <Image
               src={anime.image}
@@ -22,17 +22,17 @@ function RecentEpisodes({ data }: { data: recentEp } | any) {
         </Link>
       </div>
       <div className="info">
-        <div className="title_container hidden md:flex">
+        <div className="title_container hidden lg:flex">
           <h3 className="title text-center text-xs w-full px-1 ">
             {anime.title.userPreferred}
           </h3>
         </div>
-        <div className="blur_bg hidden md:block"></div>
+        <div className="blur_bg hidden lg:block"></div>
         <p className="episode text-xs lg:text-sm">Ep: {anime.episodeNumber}</p>
       </div>
       <div className="play_layer">
         <div className="play_icon w-1/4">
-          <Link href={`/detail/${anime.malId}`}>
+          <Link href={`/detail/${anime.id}`}>
             <a title="go to detail page">
               <Play />
             </a>
@@ -103,6 +103,9 @@ export const Recent_Episodes = styled.main`
         background-color: #000;
         margin: 5px 5px 0px 0px;
         border-radius: 10px;
+      }
+      h3 {
+        font-size: 10px;
       }
       .title_container {
         position: absolute;

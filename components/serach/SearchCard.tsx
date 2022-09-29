@@ -1,48 +1,71 @@
+import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { Aproved, Clock, Play, Rejected } from "../../Icons/Icons";
-import { dataOb } from "../../interfaces";
+import { Play } from "../../Icons/Icons";
+import { anilistInfo } from "../../interfaces";
 
 // -----------
 
-function SearchCard({ data }: dataOb) {
-  const title = data.title.slice(0, 19);
+function SearchCard({ data }: { data: anilistInfo }) {
+  const title = data.title.userPreferred.slice(0, 19);
+  const [hasCompleted, setHasCompleted] = useState(true);
+  useEffect(() => {
+    if (data.status === "Ongoing") {
+      setHasCompleted(false);
+    }
+  }, []);
   // -----------
 
   return (
     <Div className="SearchCard">
-      <div className="cover_image">
-        <Link href={`/detail/${data.mal_id}`}>
-          <a title={`go to ${data.title} detail page`}>
-            <img
-              src={data.images.webp.image_url}
-              alt="Cover image"
-              width="200"
-              height="285"
-            />
+      <div className="cover_image relative">
+        <Link href={`/detail/${data.id}`}>
+          <a title={`go to ${data.title.userPreferred} detail page`}>
+            <Image src={data.image} alt="Cover image" layout="fill" />
           </a>
         </Link>
       </div>
       <div className="info mt-1">
-        <p className="approved">{data.approved ? <Aproved /> : <Rejected />}</p>
         <div className="play__Icon">
-          <Link href={`/detail/${data.mal_id}`}>
+          <Link href={`/detail/${data.id}`}>
             <a title="go to detail page">
               <Play />
             </a>
           </Link>
         </div>
-        <div className="score_type hidden md:block">
-          <h1 className="title" title={data.title}>
+        <div className="score_type hidden md:block text-xs md:text-sm">
+          <h1
+            className=" first-letter:text-yellow-500 title"
+            title={data.title.userPreferred}
+          >
             {title}
-            {data.title.length > 20 && "..."}
+            {data.title.userPreferred.length > 20 && "..."}
           </h1>
-          <p className="type">Type: {data.type}</p>
-          <p className="score">Score: {data.score}</p>
-          <p className="duration flex items-center">
-            <Clock /> {data.duration}
+          <p className=" first-letter:text-yellow-600 type">
+            Type: {data.type} 📺
           </p>
-          <p className="source">Source: {data.source}</p>
+          <p className=" first-letter:text-yellow-600 score">
+            Rating: {data.rating}
+          </p>
+          <p className=" first-letter:text-yellow-600 status">
+            Status : {data.status} {hasCompleted ? "✔️" : "👀"}
+          </p>
+          {data.hasOwnProperty("duration") && (
+            <p className="first-letter:text-yellow-600 status">
+              Duration ⏳ :{data.duration} min
+            </p>
+          )}
+          {data.hasOwnProperty("genres") && (
+            <div className="flex flex-wrap items-center justify-center mt-1">
+              {data.genres.map((e) => (
+                <p className="first-letter:text-yellow-600 status px-1 border border-solid mr-2 text-xs border-yellow-600">
+                  {e}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </Div>
@@ -55,12 +78,16 @@ export const Div = styled.div`
   display: block;
   width: 16%;
   margin-right: 0.6%;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   position: relative;
   border-radius: 10px;
-  min-width: 120px;
+  min-width: 110px;
   .cover_image {
     height: auto;
+    aspect-ratio: 0.7;
+    span {
+      position: initial !important;
+    }
     img {
       height: 100%;
       width: 100%;
@@ -73,7 +100,7 @@ export const Div = styled.div`
     padding-left: 5px;
     height: 100%;
     width: 100%;
-    background-color: #040303b4;
+    background-color: #040303e2;
     display: flex;
     flex-direction: column;
     justify-content: end;
@@ -83,8 +110,8 @@ export const Div = styled.div`
       left: 50%;
       top: 45%;
       transform: translate(-50%, -50%);
-      width: 70px;
-      height: 70px;
+      width: 20%;
+      height: 20%;
       svg {
         width: 100%;
         height: 100%;
@@ -92,10 +119,6 @@ export const Div = styled.div`
     }
     .score_type {
       padding: 10px;
-    }
-    .approved {
-      position: absolute;
-      top: 10px;
     }
   }
   .cover_image:hover + .info,

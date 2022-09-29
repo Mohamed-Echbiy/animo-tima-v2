@@ -15,7 +15,7 @@ function AnimeStatic({ id }: number | any) {
     return <></>;
   }
   return (
-    <div className="px-4 md:px-3 lg:px-3 xl:px-5 2xl:px-10">
+    <div className="px-4 md:px-3 lg:px-3 xl:px-5 2xl:px-10 mt-5">
       <div className="anime_Statics  flex flex-wrap justify-around items-center text-xs md:text-sm text-gray-300 capitalize">
         <p className="border-2 rounded-md border-lime-600 border-solid mb-2 py-2 px-4 completed">
           <span>completed ✔️ : </span>

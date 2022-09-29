@@ -14,7 +14,7 @@ function Trending({ data }: { data: anime } | any) {
   const results = data.map((anime: anime, index: number) => (
     <SwiperSlide key={nanoid()}>
       <Image__Container className="image_container relative">
-        <Link href={`/detail/${anime.malId}`}>
+        <Link href={`/detail/${anime.id}`}>
           <a title="watch now">
             <Image
               src={anime.image}
