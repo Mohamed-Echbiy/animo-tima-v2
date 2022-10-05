@@ -200,13 +200,9 @@ export const getServerSideProps = async (context: {
   const url = await params.id;
   const episodeId = await url.slice(0, url.indexOf("@"));
   const Id = await url.slice(url.indexOf("@") + 1);
-  const response = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/watch/${episodeId}`
-  );
+  const response = await fetch(`${process.env.HOSTNAME}watch/${episodeId}`);
   const data1 = await response.json();
-  const InfoData = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/info/${Id}`
-  );
+  const InfoData = await fetch(`${process.env.HOSTNAME}info/${Id}`);
   const data2 = await InfoData.json();
   const results = [data1, data2, Id, episodeId];
   res.setHeader(

@@ -26,23 +26,23 @@ export default index;
 
 export const getServerSideProps = async () => {
   const resP1 = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?format=ONA&perPage=50&page=1`
+    `${process.env.HOSTNAME}advanced-search?format=ONA&perPage=50&page=1`
   );
   const dataP1 = await resP1.json();
   const result1 = await dataP1.results;
   const resP2 = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?format=ONA&perPage=50&page=2`
+    `${process.env.HOSTNAME}advanced-search?format=ONA&perPage=50&page=2`
   );
   const dataP2 = await resP2.json();
   const result2 = await dataP2.results;
   const resP3 = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?format=ONA&perPage=50&page=3`
+    `${process.env.HOSTNAME}advanced-search?format=ONA&perPage=50&page=3`
   );
   const dataP3 = await resP3.json();
   const result3 = await dataP3.results;
   //
   const resP4 = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?format=ONA&perPage=50&page=4`
+    `${process.env.HOSTNAME}advanced-search?format=ONA&perPage=50&page=4`
   );
   const dataP4 = await resP4.json();
   const result4 = await dataP4.results;

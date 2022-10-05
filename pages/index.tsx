@@ -66,43 +66,39 @@ const TopList_Container = styled.div`
 `;
 
 export const getStaticProps = async () => {
-  const hero_res = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/trending`
-  );
+  const hero_res = await fetch(`${process.env.HOSTNAME}trending`);
 
   const data = await hero_res.json();
   const hero_data = await data.results;
   //
-  const popular_res = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/popular`
-  );
+  const popular_res = await fetch(`${process.env.HOSTNAME}popular`);
 
   const data1 = await popular_res.json();
   const popular_data = await data1.results;
   //
   const completed_res = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?type=ANIME&page=1&perPage=6&status=FINISHED&format=TV&sort=["END_DATE_DESC"]`
+    `${process.env.HOSTNAME}advanced-search?type=ANIME&page=1&perPage=6&status=FINISHED&format=TV&sort=["END_DATE_DESC"]`
   );
 
   const data2 = await completed_res.json();
   const completed_data = await data2.results;
   //
   const movie_res = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?format=MOVIE&perPage=5`
+    `${process.env.HOSTNAME}advanced-search?format=MOVIE&perPage=5`
   );
 
   const data4 = await movie_res.json();
   const movie_data = await data4.results;
   //
   const upcoming_res = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?status=NOT_YET_RELEASED&perPage=5`
+    `${process.env.HOSTNAME}advanced-search?status=NOT_YET_RELEASED&perPage=5`
   );
 
   const data5 = await upcoming_res.json();
   const upcoming_data = await data5.results;
   //
   const recent_Episodes = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/recent-episodes?perPage=12`
+    `${process.env.HOSTNAME}recent-episodes?perPage=12`
   );
   const data6 = await recent_Episodes.json();
   const recent_Episodes_data = await data6.results;

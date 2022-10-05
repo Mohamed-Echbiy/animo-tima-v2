@@ -42,7 +42,7 @@ export const getServerSideProps = async (context: {
 }) => {
   const { params, res } = context;
   const data = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/${params.searchFor}?perPage=100`
+    `${process.env.HOSTNAME}${params.searchFor}?perPage=100`
   );
   const response = await data.json();
   const searchResult = await response.results;

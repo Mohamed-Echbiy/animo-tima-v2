@@ -73,15 +73,15 @@ const ContainerSeason = styled(Container)``;
 export const getServerSideProps = async (context: { params: any }) => {
   const { params } = context;
   const response1 = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?season=${params.seasonid}&perPage=100&page=1`
+    `${process.env.HOSTNAME}advanced-search?season=${params.seasonid}&perPage=100&page=1`
   );
   const data1 = await response1.json();
   const response2 = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?season=${params.seasonid}&perPage=100&page=2`
+    `${process.env.HOSTNAME}advanced-search?season=${params.seasonid}&perPage=100&page=2`
   );
   const data2 = await response2.json();
   const response3 = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?season=${params.seasonid}&perPage=100&page=3`
+    `${process.env.HOSTNAME}advanced-search?season=${params.seasonid}&perPage=100&page=3`
   );
   const data3 = await response3.json();
   const data = [...data1.results, ...data2.results, ...data3.results];

@@ -12,9 +12,11 @@ function Seasons() {
   //
   const fetchData = async () => {
     const res = await fetch(
-      `https://consumet-api.herokuapp.com/meta/anilist/advanced-search?season=${season}`
+      `https://api.consumet.org/meta/anilist/advanced-search?season=${season}`
     );
+    console.log(res);
     const data = await res.json();
+    console.log(data);
     return data.results.slice(0, 12);
   };
   const { data, isLoading, isError } = useQuery(

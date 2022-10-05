@@ -47,9 +47,7 @@ export const getServerSideProps = async (context: {
 }) => {
   const { params, res } = context;
   //
-  const info_res = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/info/${params.id}`
-  );
+  const info_res = await fetch(`${process.env.HOSTNAME}info/${params.id}`);
   const info_data = await info_res.json();
   const infoResult = await info_data;
   //

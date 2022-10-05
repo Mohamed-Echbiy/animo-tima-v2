@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useQuery } from "@tanstack/react-query";
 import { Navigation } from "swiper";
 
 // Import Swiper styles

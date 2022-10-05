@@ -53,14 +53,12 @@ const Full_Recent_Episodes = styled(Recent_Episodes)`
 export default index;
 
 export const getServerSideProps = async () => {
-  const res = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/trending?perPage=100&page=1`
-  );
+  const res = await fetch(`${process.env.HOSTNAME}trending?perPage=100&page=1`);
   const dataprops = await res.json();
   const data1 = dataprops.results;
   //
   const res1 = await fetch(
-    `https://consumet-api.herokuapp.com/meta/anilist/trending?perPage=100&page=2`
+    `${process.env.HOSTNAME}trending?perPage=100&page=2`
   );
   const dataprops1 = await res1.json();
   const data2 = dataprops1.results;
