@@ -1,3 +1,7 @@
 {
-  "cSpell.words": ["chara"]
+    "files.watcherExclude": {
+        "**/Icons/**": true,
+        "**/public/**": true,
+        "**/styles/**": true
+    }
 }
